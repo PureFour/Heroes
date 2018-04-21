@@ -8,4 +8,4 @@ add_executable(
         src/Hero.cpp include/Hero.h
         src/Warrior.cpp include/Warrior.h
         src/Archer.cpp include/Archer.h
-        src/Mage.cpp include/Mage.h)
+        src/Mage.cpp include/Mage.h include/Game.h src/Game.cpp)
