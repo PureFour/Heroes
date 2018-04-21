@@ -5,12 +5,7 @@
 
 int main()
 {
-    std::cout << "Hello, World!" << std::endl;
-    Warrior John("John");
-    Mage Harry("Harry");
-    John.status();
-    Harry.status();
-    John.attack(Harry);
-    Harry.status();
+    Warrior W;
+    W.status();
     return 0;
 }
