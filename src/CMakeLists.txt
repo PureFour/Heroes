@@ -2,4 +2,4 @@ set(CMAKE_CXX_FLAGS "-std=c++11")
 
 include_directories("../include")
 
-add_library(Heros heros.cpp)
+add_library(Heros heros.cpp ../include/heros.h warrior.cpp)

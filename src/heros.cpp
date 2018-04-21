@@ -1,7 +1,4 @@
-#include <heros.hpp>
-/*
-void Fight::attack(Hero &attackedHero) {
+#include <iostream>
+#include "heros.h"
 
-    
 
-}*/
