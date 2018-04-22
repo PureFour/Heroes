@@ -5,7 +5,7 @@ int main()
     srand(static_cast<unsigned int>(time(nullptr))); //For randomizing!
     //Initialize main objects
     Game game;
-    Hero* pointer;
+    Hero *pointer = nullptr;
     std::string Name;
     //
     game.startMessage(Name);

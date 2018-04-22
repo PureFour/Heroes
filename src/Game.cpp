@@ -14,6 +14,7 @@ void Game::startMessage(std::string &n) const
     std::cout << std::string(77, '=') << std::endl;
     std::cout << "\n\n\n\nThis is the story about..." << "__________\b\b\b\b\b\b\b\b\b\b";
     std::cin >> n;
+    ClearScreen();
 }
 
 void Game::mainMenu(Hero *p)
@@ -29,6 +30,7 @@ void Game::mainMenu(Hero *p)
     std::cout << std::string(77, '=') << std::endl;
     std::cout << "My Choice:_\b";
     std::cin >> getOption(); //TODO Zrobic zabezpieczenie na niepoprawny input!
+    ClearScreen();
     // Kod na zabezpieczenie!
     switch(getOption())
     {
@@ -54,6 +56,7 @@ unsigned int Game::HeroChoice()
     std::cout << std::string(77, '-') << std::endl;
     std::cout << "My Choice:_\b";
     std::cin >> getOption(); // TODO zabezpieczyc tu rowniez!
+    ClearScreen();
     return getOption();
 }
 

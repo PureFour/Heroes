@@ -9,4 +9,5 @@ add_executable(
         src/Warrior.cpp include/Warrior.h
         src/Archer.cpp include/Archer.h
         src/Mage.cpp include/Mage.h
-        include/Game.h src/Game.cpp)
+        src/Game.cpp include/Game.h
+        src/Functions.cpp include/Functions.h)
