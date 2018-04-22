@@ -1,8 +1,6 @@
 #include "../include/Hero.h"
 #include "../include/Archer.h"
 
-#include <ctime>
-
 void Archer::attack(Hero &)
 {
 

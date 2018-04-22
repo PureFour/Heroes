@@ -1,15 +1,11 @@
 #include "Game.h"
-#include <utility>
-#include <string>
-#include <vector>
-
 #ifndef HEROES_HERO_H
 #define HEROES_HERO_H
 
 class Hero : public Game  //BASE CLASS FOR HEROES
 {
 protected:
-    //Stats
+    //Basic Stats
     std::string name;
     unsigned int _HP;
     unsigned int _MANA;
@@ -19,6 +15,12 @@ protected:
     unsigned int _LVL;
     unsigned int _EXP;
     unsigned int _EXP2NEXTLVL;
+    //
+    unsigned int _Strenght;
+    unsigned int _Vitality;
+    unsigned int _Dexterity;
+    unsigned int _Intelligence;
+    unsigned int _Luck;
 public:
     void status();
     //getFunctions
@@ -31,13 +33,20 @@ public:
     const unsigned int &getLVL() const;
     const unsigned int &getEXP() const;
     const unsigned int &getEXP2NEXTLVL() const;
-    //
+
+    const unsigned int &getStr() const;
+    const unsigned int &getVit() const;
+    const unsigned int &getDex() const;
+    const unsigned int &getInt() const;
+    const unsigned int &getLuck() const;
+    //HeroFunctions
     void LevelUp();
     virtual void attack(Hero &) = 0;
-
+    void Travel();
+    //
     explicit Hero(std::string name = "Unknown");
     virtual ~Hero();
-
+    //
 };
 
 #endif //HEROES_HERO_H
