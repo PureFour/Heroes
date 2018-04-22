@@ -1,18 +1,18 @@
 #include "include/Game.h" //including: iomanip iostream, utility, string  libriaries...
-#include "include/Hero.h"
-#include "include/Warrior.h"
-#include "include/Mage.h"
-#include "include/Archer.h"
 
 int main()
 {
-    Game game;
     srand(static_cast<unsigned int>(time(nullptr))); //For randomizing!
-    game.startMessage();
-
+    //Initialize main objects
+    Game game;
+    Hero* pointer;
+    std::string Name;
+    //
+    game.startMessage(Name);
+    pointer = pointer->Initialize(Name, game.HeroChoice());
     while(game.getRunning()) //Main Loop...
     {
-        game.mainMenu();
+        game.mainMenu(pointer);
     }
     return 0;
 }

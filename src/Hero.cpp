@@ -1,4 +1,7 @@
 #include "../include/Hero.h"
+#include "../include/Warrior.h"
+#include "../include/Mage.h"
+#include "../include/Archer.h"
 
 Hero::Hero(std::string n) :name(std::move(n)) {}
 Hero::~Hero() = default;
@@ -18,6 +21,21 @@ const unsigned int &Hero::getVit() const { return this->_Vitality; }
 const unsigned int &Hero::getDex() const { return this->_Dexterity; }
 const unsigned int &Hero::getInt() const { return this->_Intelligence; }
 const unsigned int &Hero::getLuck() const { return this->_Luck; }
+
+Hero *Hero::Initialize(std::string n, unsigned int choice)
+{
+    switch(choice)
+    {
+        case 1:
+            return new Warrior(n);
+        case 2:
+            return new Mage(n);
+        case 3:
+            return new Archer(n);
+        default:
+            break;
+    }
+}
 
 void Hero::status()
 {

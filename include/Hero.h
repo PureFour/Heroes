@@ -1,8 +1,14 @@
-#include "Game.h"
+#include <iomanip>
+#include <iostream>
+#include <utility>
+#include <string>
+#include <vector>
+#include <ctime>
+#include <cmath>
 #ifndef HEROES_HERO_H
 #define HEROES_HERO_H
 
-class Hero : public Game  //BASE CLASS FOR HEROES
+class Hero  //BASE CLASS FOR HEROES
 {
 protected:
     //Basic Stats
@@ -21,8 +27,8 @@ protected:
     unsigned int _Dexterity;
     unsigned int _Intelligence;
     unsigned int _Luck;
+    //
 public:
-    void status();
     //getFunctions
     const std::string &getName() const;
     const unsigned int &getHP() const;
@@ -33,16 +39,17 @@ public:
     const unsigned int &getLVL() const;
     const unsigned int &getEXP() const;
     const unsigned int &getEXP2NEXTLVL() const;
-
     const unsigned int &getStr() const;
     const unsigned int &getVit() const;
     const unsigned int &getDex() const;
     const unsigned int &getInt() const;
     const unsigned int &getLuck() const;
     //HeroFunctions
+    void status();
+    Hero *Initialize(std::string, unsigned int);
     void LevelUp();
     virtual void attack(Hero &) = 0;
-    void Travel();
+    void Travel(); //TODO BARTEK!!!
     //
     explicit Hero(std::string name = "Unknown");
     virtual ~Hero();

@@ -1,10 +1,4 @@
-#include <iomanip>
-#include <iostream>
-#include <utility>
-#include <string>
-#include <vector>
-#include <ctime>
-#include <cmath>
+#include "Hero.h"
 
 #ifndef HEROES_GAME_H
 #define HEROES_GAME_H
@@ -12,6 +6,7 @@
 
 class Game
 {
+    friend class Hero;
     unsigned int _Option;
     bool _Running = true;  //FOR WHILE MAIN LOOP
 public:
@@ -21,8 +16,9 @@ public:
     bool &getRunning();
     unsigned int &getOption();
     //
-    void startMessage() const;
-    void mainMenu();
+    void startMessage(std::string&) const;
+    unsigned int HeroChoice();
+    void mainMenu(Hero *);
 
 };
 
