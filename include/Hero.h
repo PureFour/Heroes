@@ -8,8 +8,9 @@
 #ifndef HEROES_HERO_H
 #define HEROES_HERO_H
 
-class Hero  //BASE CLASS FOR HEROES
+class Hero   //BASE CLASS FOR HEROES
 {
+
 protected:
     //Basic Stats
     std::string name;

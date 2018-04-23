@@ -1,5 +1,4 @@
 #include "Hero.h"
-
 #ifndef HEROES_GAME_H
 #define HEROES_GAME_H
 

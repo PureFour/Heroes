@@ -3,19 +3,18 @@
 #include "include/Mage.h"
 #include "include/Archer.h"
 #include "include/Enemy.h"
+#include "include/Inventory.h"
 
 int main()
 {
     srand(static_cast<unsigned int>(time(nullptr))); //For randomizing!
+    Inventory inventory;
+    Item item, item1, item2;
     //Initialize main objects
     Game game;
     Hero *pointer = nullptr;
-    Warrior John("John");
-    Enemy Dog("Dog");
-    John.attack(Dog);
-    Dog.status();
-    std::string Name;
     //
+    std::string Name;
     game.startMessage(Name);
     pointer = pointer->Initialize(Name, game.HeroChoice());
     while(game.getRunning()) //Main Loop...

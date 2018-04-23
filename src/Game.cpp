@@ -25,7 +25,8 @@ void Game::mainMenu(Hero *p)
     std::cout << "(1) Hero Stats"<< std::endl;
     std::cout << "(2) Travel"<< std::endl;
     std::cout << "(3) Shop"<< std::endl;
-    std::cout << "(4) LvlUp!"<< std::endl;
+    std::cout << "(4) Inventory"<< std::endl;
+    std::cout << "(5) LvlUp!"<< std::endl;
     std::cout << "(0) Exit Game"<< std::endl;
     std::cout << std::string(77, '=') << std::endl;
     std::cout << "My Choice:_\b";
@@ -39,6 +40,18 @@ void Game::mainMenu(Hero *p)
             break;
         case 1:
             p->status();
+            break;
+        case 2:
+
+            break;
+        case 3:
+
+            break;
+        case 4:
+
+            break;
+        case 5:
+
             break;
         default:
             break;
