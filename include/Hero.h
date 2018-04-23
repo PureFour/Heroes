@@ -44,6 +44,9 @@ public:
     const unsigned int &getDex() const;
     const unsigned int &getInt() const;
     const unsigned int &getLuck() const;
+    //SetFunctions
+    const unsigned int &setHP(unsigned int);
+    //
     //HeroFunctions
     void status();
     Hero *Initialize(std::string, unsigned int);

@@ -22,6 +22,11 @@ const unsigned int &Hero::getDex() const { return this->_Dexterity; }
 const unsigned int &Hero::getInt() const { return this->_Intelligence; }
 const unsigned int &Hero::getLuck() const { return this->_Luck; }
 
+const unsigned int& Hero::setHP(unsigned int hp)
+{
+    _HP = hp;
+}
+
 Hero *Hero::Initialize(std::string n, unsigned int choice)
 {
     switch(choice)

@@ -10,4 +10,4 @@ add_executable(
         src/Archer.cpp include/Archer.h
         src/Mage.cpp include/Mage.h
         src/Game.cpp include/Game.h
-        src/Functions.cpp include/Functions.h)
+        src/Functions.cpp include/Functions.h src/Enemy.cpp include/Enemy.h src/Inventory.cpp include/Inventory.h)
