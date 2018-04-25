@@ -1,6 +1,15 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.9)
+project(Heroes)
 
-project(Gierka)
+set(CMAKE_CXX_STANDARD 11)
 
-add_subdirectory(src)
-add_subdirectory(test)
+add_executable(
+        Heroes main.cpp
+        src/Hero.cpp include/Hero.h
+        src/Warrior.cpp include/Warrior.h
+        src/Archer.cpp include/Archer.h
+        src/Mage.cpp include/Mage.h
+        src/Game.cpp include/Game.h
+        src/Functions.cpp include/Functions.h
+        src/Enemy.cpp include/Enemy.h
+        src/Inventory.cpp include/Inventory.h src/Item.cpp include/Item.h)
