@@ -3,7 +3,7 @@
 
 Warrior::Warrior(std::string n) : Hero(n)
 {
-    this->_LVL = 10;
+    this->_LVL = 2;
     this->_EXP = 0;
     this->_EXP2NEXTLVL = static_cast<unsigned int>((50/3) * (pow(this->_LVL, 3.0) - 6.0 * pow(this->_LVL, 3.0) + (17.0 * this->_LVL) - 11)); //LVL^UP FORMULA
 
