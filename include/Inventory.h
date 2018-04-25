@@ -12,7 +12,7 @@ class Inventory
 public:
     Inventory();
     virtual ~Inventory();
-    const void show() const;
+    const void showInv() const;
     const void addItem(Item*);
     const void removeItem(Item*);
 };

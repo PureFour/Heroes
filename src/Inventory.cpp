@@ -8,7 +8,7 @@ Inventory::Inventory()
 }
 Inventory::~Inventory() {}
 
-const void Inventory::show() const
+const void Inventory::showInv() const
 {
     if(Size == 0) std::cout << "Inventory is empty!" << std::endl;
     else

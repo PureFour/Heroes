@@ -48,7 +48,7 @@ void Game::mainMenu(Hero *p)
 
             break;
         case 4:
-
+            p->showInv();
             break;
         case 5:
 
@@ -71,5 +71,28 @@ unsigned int Game::HeroChoice()
     std::cin >> getOption(); // TODO zabezpieczyc tu rowniez!
     ClearScreen();
     return getOption();
+}
+
+void Game::InventoryMenu(Hero *p)
+{
+    std::cout << "Choose Option!" << std::endl;
+    std::cout << "(1) Show Inventory" << std::endl;
+    std::cout << "(2) Add Item" << std::endl;
+    std::cout << "(3) Remove Item" << std::endl;
+    std::cin >> getOption();
+    switch(getOption())
+    {
+        case 1:
+            p->showInv();
+            break;
+        case 2:
+
+            break;
+        case 3:
+
+            break;
+        default:
+            break;
+    }
 }
 

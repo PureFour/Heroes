@@ -41,3 +41,5 @@ void Warrior::attack(Hero &enemy)
     std::cout  << "Inflicted damage: " << (damage - defence) << " to " << enemy.getName() << std::endl;
     std::cout  << enemy.getName() << " HP = " << enemy.getHP() << std::endl;
 }
+
+

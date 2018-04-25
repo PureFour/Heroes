@@ -2,13 +2,13 @@
 #include <iomanip>
 #include <string>
 #include <utility>
-#include <vector>
 #include <ctime>
 #include <cmath>
+#include "Inventory.h"
 #ifndef HEROES_HERO_H
 #define HEROES_HERO_H
 
-class Hero   //BASE CLASS FOR HEROES
+class Hero : public Inventory   //BASE CLASS FOR HEROES
 {
 
 protected:

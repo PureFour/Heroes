@@ -65,7 +65,7 @@ void Hero::status()
 
 void Hero::LevelUp()
 {
-
+    
 }
 
 

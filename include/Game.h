@@ -18,6 +18,7 @@ public:
     void startMessage(std::string&) const;
     unsigned int HeroChoice();
     void mainMenu(Hero *);
+    void InventoryMenu(Hero *);
 
 };
 

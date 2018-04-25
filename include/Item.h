@@ -1,4 +1,4 @@
-#include "Game.h"
+#include <iostream>
 #ifndef HEROES_ITEM_H
 #define HEROES_ITEM_H
 
