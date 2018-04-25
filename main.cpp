@@ -12,6 +12,7 @@ int main()
     Game game;
     Hero *pointer = nullptr;
     //
+
     std::string Name;
     game.startMessage(Name);
     pointer = pointer->Initialize(Name, game.HeroChoice());
