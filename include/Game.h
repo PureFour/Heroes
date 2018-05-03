@@ -1,4 +1,5 @@
 #include "Hero.h"
+#include "../include/Enemy.h"
 #ifndef HEROES_GAME_H
 #define HEROES_GAME_H
 
@@ -6,6 +7,7 @@
 class Game
 {
     friend class Hero;
+    friend class Enemy;
     unsigned int _Option;
     bool _Running = true;  //FOR WHILE MAIN LOOP
 public:

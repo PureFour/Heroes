@@ -3,6 +3,7 @@
 #include <string>
 #include <utility>
 #include <ctime>
+#include <unistd.h>
 #include <cmath>
 #include "Inventory.h"
 #ifndef HEROES_HERO_H
@@ -47,6 +48,7 @@ public:
     const unsigned int &getLuck() const;
     //SetFunctions
     const unsigned int &setHP(unsigned int);
+    const unsigned int &setLVL(unsigned int);
     //
     //HeroFunctions
     void status();
