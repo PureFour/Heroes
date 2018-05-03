@@ -19,6 +19,8 @@ void Game::startMessage(std::string &n) const
 
 void Game::mainMenu(Hero *p)
 {
+    Enemy enemy("DOG");
+
     std::cout << std::string(77, '*') << std::endl;
     std::cout << "\n" <<std::string(32, ' ') <<"-MAIN MENU-\n"<< std::endl;
     std::cout << std::string(77, '*') << std::endl;
@@ -40,18 +42,22 @@ void Game::mainMenu(Hero *p)
             break;
         case 1:
             p->status();
+            sleep(2);
             break;
         case 2:
-
+            enemy.attack(*p);
+            sleep(2);
             break;
         case 3:
 
             break;
         case 4:
             p->showInv();
+            sleep(2);
             break;
         case 5:
-
+            p->LevelUp();
+            sleep(2);
             break;
         default:
             break;

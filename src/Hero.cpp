@@ -27,6 +27,11 @@ const unsigned int& Hero::setHP(unsigned int hp)
     _HP = hp;
 }
 
+const unsigned int& Hero::setLVL(unsigned int lv)
+{
+    _LVL = lv;
+}
+
 Hero *Hero::Initialize(std::string n, unsigned int choice)
 {
     switch(choice)
@@ -65,7 +70,7 @@ void Hero::status()
 
 void Hero::LevelUp()
 {
-    
+    this->_LVL += 1;
 }
 
 

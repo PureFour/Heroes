@@ -8,10 +8,8 @@
 int main()
 {
     srand(static_cast<unsigned int>(time(nullptr))); //For randomizing!
-    Inventory inventory;
-    Item item, item1, item2;
-    inventory.addItem(&item);
     //Initialize main objects
+    Inventory inventory;
     Game game;
     Hero *pointer = nullptr;
     //

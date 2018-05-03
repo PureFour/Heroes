@@ -3,9 +3,9 @@
 
 Warrior::Warrior(std::string n) : Hero(n)
 {
-    this->_LVL = 10;
+    this->_LVL = 3;
     this->_EXP = 0;
-    this->_EXP2NEXTLVL = static_cast<unsigned int>((50/3) * (pow(this->_LVL, 3.0) - 6.0 * pow(this->_LVL, 3.0) + (17.0 * this->_LVL) - 11)); //LVL^UP FORMULA
+    this->_EXP2NEXTLVL = static_cast<unsigned int>(((50/3) * (pow(this->_LVL, 3.0)) - (6.0 * pow(this->_LVL, 3.0)) + (17.0 * this->_LVL) - 11.0)); //LVL^UP FORMULA
 
     this->_HP = 150;
     this->_MANA = 0;
@@ -36,9 +36,12 @@ void Warrior::attack(Hero &enemy)
     printf("Warrior DMG= %i\n", damage);
     std::cout  << enemy.getName() << " DEF = " << defence << std::endl;
     std::cout  << this->name << "(Warrior)" << " is performing attack!\n";
-    HP -= (damage - defence);
-    enemy.setHP(HP);
-    std::cout  << "Inflicted damage: " << (damage - defence) << " to " << enemy.getName() << std::endl;
+    if(defence < damage)
+    {
+        HP -= (damage - defence);
+        enemy.setHP(HP);
+    }
+    std::cout  << "Inflicted damage: " << ((damage > defence) ? (damage - defence) : 0) << " to " << enemy.getName() << std::endl;
     std::cout  << enemy.getName() << " HP = " << enemy.getHP() << std::endl;
 }
 
