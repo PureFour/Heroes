@@ -55,7 +55,7 @@ public:
     Hero *Initialize(std::string, unsigned int);
     void LevelUp();
     virtual void attack(Hero &) = 0;
-    void Travel(); //TODO BARTEK!!!
+    void Travel();
     //
     explicit Hero(std::string name = "Unknown");
     virtual ~Hero();

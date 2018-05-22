@@ -19,7 +19,7 @@ void Game::startMessage(std::string &n) const
 
 void Game::mainMenu(Hero *p)
 {
-    Enemy enemy("DOG");
+    Enemy enemy("DOG", 10);
 
     std::cout << std::string(77, '*') << std::endl;
     std::cout << "\n" <<std::string(32, ' ') <<"-MAIN MENU-\n"<< std::endl;

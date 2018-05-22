@@ -1,6 +1,6 @@
 #include "../include/Enemy.h"
 
-Enemy::Enemy(std::string n) :Hero(n)
+Enemy::Enemy(std::string n, int ad) :Hero(n)
 {
 
     this->_LVL = 1;
@@ -9,7 +9,7 @@ Enemy::Enemy(std::string n) :Hero(n)
 
     this->_HP = 20;
     this->_MANA = 0;
-    this->_AD = 2;
+    this->_AD = ad;
     this->_AP = 0;
     this->_DEF = 1;
 
