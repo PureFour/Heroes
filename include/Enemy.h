@@ -10,7 +10,7 @@ class Enemy :public Hero
     std::vector<Enemy *> hard;
     std::vector<Enemy *> boss;
 public:
-     Enemy(std::string n, int);
+     Enemy(std::string n, unsigned int);
     ~Enemy();
     void attack(Hero &) override;
     Enemy* spawn(std::string); //dif lvls : easy/medium/hard/BOSS

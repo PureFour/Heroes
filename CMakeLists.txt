@@ -12,4 +12,4 @@ add_executable(
         src/Game.cpp include/Game.h
         src/Functions.cpp include/Functions.h
         src/Enemy.cpp include/Enemy.h
-        src/Inventory.cpp include/Inventory.h src/Item.cpp include/Item.h)
+        src/Inventory.cpp include/Inventory.h src/Item.cpp include/Item.h include/Armor.h src/Armor.cpp)

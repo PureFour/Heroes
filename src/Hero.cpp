@@ -71,6 +71,12 @@ void Hero::status()
 void Hero::LevelUp()
 {
     this->_LVL += 1;
+    this->_EXP2NEXTLVL = static_cast<unsigned int>( ( (50/3) * ( pow(this->_LVL, 3.0) ) - (6.0 * pow(this->_LVL, 3.0) ) + (17.0 * this->_LVL) - 11.0) ); //LVL^UP FORMULA
+}
+
+bool Hero::Crit(unsigned int luck)
+{
+    return rand() % 100 < 10 * luck;
 }
 
 

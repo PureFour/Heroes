@@ -13,7 +13,7 @@ const void Inventory::showInv() const
     if(Size == 0) std::cout << "Inventory is empty!" << std::endl;
     else
     {
-        for(auto i = 0; i<Size; i++) _inventory[i]->showItem();
+        for(auto i = 0; i < Size; i++) _inventory[i]->showItem();
     }
 }
 
@@ -26,6 +26,11 @@ const void Inventory::addItem(Item *item)
         item->setIndex(Size);
         Size += 1;
     }
+}
+
+const Item* Inventory::getPointer(unsigned int index) const
+{
+
 }
 
 const void Inventory::removeItem(Item *item)

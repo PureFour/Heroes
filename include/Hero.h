@@ -11,7 +11,7 @@
 
 class Hero : public Inventory   //BASE CLASS FOR HEROES
 {
-
+    Inventory myinv;
 protected:
     //Basic Stats
     std::string name;
@@ -30,6 +30,8 @@ protected:
     unsigned int _Intelligence;
     unsigned int _Luck;
     //
+    //Functions
+    bool Crit(unsigned int);
 public:
     //getFunctions
     const std::string &getName() const;
@@ -49,6 +51,7 @@ public:
     //SetFunctions
     const unsigned int &setHP(unsigned int);
     const unsigned int &setLVL(unsigned int);
+
     //
     //HeroFunctions
     void status();
