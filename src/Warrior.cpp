@@ -19,6 +19,7 @@ Warrior::Warrior(std::string n) : Hero(n)
     this->_Intelligence = 0;
     this->_Luck = 5;
 
+    this->_inventory = {};
     std::cout << "Warrior constructor works here...\n";
 }
 

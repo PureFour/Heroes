@@ -43,8 +43,6 @@ void Game::startMessage(std::string &n) const
 
 void Game::mainMenu(Hero *p)
 {
-    Enemy enemy("DOG", 10);
-
     std::cout << std::string(77, '*') << std::endl;
     std::cout << "\n" <<std::string(32, ' ') <<"-MAIN MENU-\n"<< std::endl;
     std::cout << std::string(77, '*') << std::endl;
@@ -56,15 +54,7 @@ void Game::mainMenu(Hero *p)
     std::cout << "(0) Exit Game"<< std::endl;
     std::cout << std::string(77, '=') << std::endl;
     std::cout << "My Choice:_\b";
-    std::cin >> getOption();
-    while(!std::cin.good() || getOption() > 5 )
-    {
-        std::cout << "Try again!" << std::endl;
-        std::cin.clear();
-        std::cin.ignore('1', '\n');
-        std::cout << "My Choice:_\b";
-        std::cin >> getOption();
-    }
+    getOption() = myInput(6);
     ClearScreen();
     switch(getOption())
     {
@@ -76,8 +66,7 @@ void Game::mainMenu(Hero *p)
             sleep(1);
             break;
         case 2:
-            p->attack(enemy);
-            sleep(1);
+
             break;
         case 3:
 
@@ -105,7 +94,7 @@ unsigned int Game::HeroChoice()
     std::cout << "(3) Archer" << std::endl;
     std::cout << std::string(77, '-') << std::endl;
     std::cout << "My Choice:_\b";
-    std::cin >> getOption(); // TODO zabezpieczyc tu rowniez!
+    getOption() = myInput(4); //function from functions.h
     ClearScreen();
     return getOption();
 }
@@ -120,15 +109,7 @@ void Game::InventoryMenu(Hero *p)
         std::cout << "(2) Add Item" << std::endl;
         std::cout << "(3) Remove Item" << std::endl;
         std::cout << "(0) Quit" << std::endl;
-        std::cin >> getOption();
-        while(!std::cin.good() || getOption() > 3 )
-        {
-            std::cout << "Try again!" << std::endl;
-            std::cin.clear();
-            std::cin.ignore('1', '\n');
-            std::cout << "My Choice:_\b";
-            std::cin >> getOption();
-        }
+        getOption() = myInput(4);
         switch(getOption())
         {
             case 0:

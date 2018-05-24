@@ -20,9 +20,14 @@ Enemy::Enemy(std::string n, unsigned int ad) :Hero(n)
     this->_Luck = 0;
 }
 
+std::vector<Enemy*> Enemy::easy = {new Enemy("Dog", 10), new Enemy("Wasp", 15), new Enemy("Bat", 19)};
+std::vector<Enemy*> Enemy::medium = {};
+std::vector<Enemy*> Enemy::hard = {};
+std::vector<Enemy*> Enemy::boss = {};
+
 Enemy* Enemy::spawn(std::string difficulty_lvl)
 {
-    unsigned int r = static_cast<unsigned int>((rand() & 5) + 0);
+    auto r = ((rand() & 3) + 0);
     if(difficulty_lvl == "easy") return easy[r];
     if(difficulty_lvl == "medium") return medium[r];
     if(difficulty_lvl == "hard") return hard[r];

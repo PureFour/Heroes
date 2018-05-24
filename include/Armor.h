@@ -6,7 +6,6 @@
 class Armor : public Item
 {
     static std::vector<Item*> helmets;
-    static Item helm;
     static std::vector<Item*> breastplates[2];
     static std::vector<Item*> shields[2];
     static std::vector<Item*> boots[2];

@@ -28,11 +28,6 @@ const void Inventory::addItem(Item *item)
     }
 }
 
-const Item* Inventory::getPointer(unsigned int index) const
-{
-
-}
-
 const void Inventory::removeItem(Item *item)
 {
     if(Size == 0) std::cout << "Inventory is empty!" << std::endl;

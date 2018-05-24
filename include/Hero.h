@@ -9,9 +9,8 @@
 #ifndef HEROES_HERO_H
 #define HEROES_HERO_H
 
-class Hero : public Inventory   //BASE CLASS FOR HEROES
+class Hero : public Inventory  //BASE CLASS FOR HEROES
 {
-    Inventory myinv;
 protected:
     //Basic Stats
     std::string name;
@@ -29,6 +28,7 @@ protected:
     unsigned int _Dexterity;
     unsigned int _Intelligence;
     unsigned int _Luck;
+    Inventory _inventory;
     //
     //Functions
     bool Crit(unsigned int);

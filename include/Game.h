@@ -10,6 +10,8 @@ class Game
     friend class Enemy;
     unsigned int _Option;
     bool _Running = true;  //FOR WHILE MAIN LOOP
+
+    void Fight(Hero&, Hero&) const;
 public:
     Game();
     virtual ~Game();
