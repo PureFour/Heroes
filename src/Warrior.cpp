@@ -47,6 +47,7 @@ void Warrior::attack(Hero &enemy)
         HP -= (damage - defence);
         enemy.setHP(HP);
     }
+    if(damage > HP) enemy.setHP(0);
     std::cout  << "Inflicted damage: " << ((damage > defence) ? (damage - defence) : 0) << " to " << enemy.getName() << std::endl;
     std::cout  << enemy.getName() << " HP = " << enemy.getHP() << std::endl;
 }

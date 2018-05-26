@@ -1,5 +1,5 @@
 #include "include/Game.h" //including: iomanip iostream, utility, string  libriaries...
-#include "include/Armor.h"
+#include "include/Shop.h"
 int main()
 {
     srand(static_cast<unsigned int>(time(nullptr))); //For randomizing!

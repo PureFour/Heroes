@@ -23,7 +23,7 @@ Enemy::Enemy(std::string n, unsigned int ad) :Hero(n)
 std::vector<Enemy*> Enemy::easy = {new Enemy("Dog", 10), new Enemy("Wasp", 15), new Enemy("Bat", 19)};
 std::vector<Enemy*> Enemy::medium = {};
 std::vector<Enemy*> Enemy::hard = {};
-std::vector<Enemy*> Enemy::boss = {};
+std::vector<Enemy*> Enemy::boss = {new Enemy("Freakin Dog", 100), new Enemy("BIG SHITTY Wasp", 150), new Enemy("BLACK DICK Bat", 190)};
 
 Enemy* Enemy::spawn(std::string difficulty_lvl)
 {
@@ -50,6 +50,7 @@ void Enemy::attack(Hero &hero)
         HP -= (damage - defence);
         hero.setHP(HP);
     }
+    if(damage > HP) hero.setHP(0);
     std::cout << getName() << " is Attacking you!\n";
     std::cout << "Received damage: " << ((damage > defence) ? (damage - defence) : 0) << std::endl;
 }

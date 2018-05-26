@@ -51,6 +51,7 @@ public:
     //SetFunctions
     const unsigned int &setHP(unsigned int);
     const unsigned int &setLVL(unsigned int);
+    const unsigned int &setEXP(unsigned int);
 
     //
     //HeroFunctions

@@ -7,6 +7,11 @@ Game::~Game() {}
 bool &Game::getRunning() { return this->_Running;}
 unsigned int &Game::getOption() { return this->_Option;}
 
+void Game::setRunning()
+{
+    _Running = !getRunning() && true;
+}
+
 void Game::startMessage(std::string &n) const
 {
     std::cout << std::string(77, '=');
@@ -43,6 +48,8 @@ void Game::startMessage(std::string &n) const
 
 void Game::mainMenu(Hero *p)
 {
+    Shop *shop_p = nullptr;
+    Enemy *enemy_p = nullptr;
     std::cout << std::string(77, '*') << std::endl;
     std::cout << "\n" <<std::string(32, ' ') <<"-MAIN MENU-\n"<< std::endl;
     std::cout << std::string(77, '*') << std::endl;
@@ -66,10 +73,11 @@ void Game::mainMenu(Hero *p)
             sleep(1);
             break;
         case 2:
-
+            enemy_p = enemy_p->spawn("easy");
+            Fight(*p, *enemy_p);
             break;
         case 3:
-
+            shop_p->Initialize();
             break;
         case 4:
             InventoryMenu(p);
@@ -130,3 +138,26 @@ void Game::InventoryMenu(Hero *p)
     }
 }
 
+void Game::Fight(Hero &hero, Enemy &enemy)
+{
+
+    while(hero.getHP() > 0 && enemy.getHP() > 0)
+    {
+        std::cout << "Hero HP= " <<hero.getHP();
+        std::cout << "Enemy HP = " << enemy.getHP() << std::endl;
+        hero.attack(enemy);
+        sleep(2);
+        enemy.attack(hero);
+    }
+    if(enemy.getHP() <= 0)
+    {
+        std::cout << "Enemy defeated!" << std::endl;
+        hero.setEXP(hero.getEXP() + 100);
+    }
+    else
+    {
+        std::cout << "You have been defeated!" << std::endl;
+       // std::cout << "\n" <<std::string(32, ' ') <<"-GAME OVER-\n"<< std::endl;
+        setRunning();
+    }
+}

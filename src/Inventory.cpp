@@ -4,7 +4,7 @@ Inventory::Inventory()
 {
     this->_inventory = {};
     this->Size = 0;
-    this->maxSize = 5;
+    this->maxSize = 8;
 }
 Inventory::~Inventory() {}
 

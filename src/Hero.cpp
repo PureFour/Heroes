@@ -32,6 +32,11 @@ const unsigned int& Hero::setLVL(unsigned int lv)
     _LVL = lv;
 }
 
+const unsigned int& Hero::setEXP(unsigned int exp)
+{
+    _EXP = exp;
+}
+
 Hero *Hero::Initialize(std::string n, unsigned int choice)
 {
     switch(choice)
@@ -70,14 +75,20 @@ void Hero::status()
 
 void Hero::LevelUp()
 {
-    this->_LVL += 1;
-    this->_EXP2NEXTLVL = static_cast<unsigned int>( ( (50/3) * ( pow(this->_LVL, 3.0) ) - (6.0 * pow(this->_LVL, 3.0) ) + (17.0 * this->_LVL) - 11.0) ); //LVL^UP FORMULA
+    while(this->_EXP > this->_EXP2NEXTLVL)
+    {
+        this->_LVL += 1;
+        this->_EXP -= this->_EXP2NEXTLVL;
+        this->_EXP2NEXTLVL = static_cast<unsigned int>( ( (50/3) * ( pow(this->_LVL, 3.0) ) - (6.0 * pow(this->_LVL, 3.0) ) + (17.0 * this->_LVL) - 11.0) ); //LVL^UP FORMULA
+    }
+    std::cout << "LVL UP!\nYOUR LV IS " << getLVL() << " NOW!" << std::endl;
 }
-
 bool Hero::Crit(unsigned int luck)
 {
     return rand() % 100 < 10 * luck;
 }
+
+
 
 
 
