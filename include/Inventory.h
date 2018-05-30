@@ -1,4 +1,3 @@
-#include <vector>
 #include "Item.h"
 #ifndef HEROES_INVENTORY_H
 #define HEROES_INVENTORY_H

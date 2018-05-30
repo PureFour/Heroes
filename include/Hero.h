@@ -9,9 +9,8 @@
 #ifndef HEROES_HERO_H
 #define HEROES_HERO_H
 
-class Hero : public Inventory   //BASE CLASS FOR HEROES
+class Hero : public Inventory  //BASE CLASS FOR HEROES
 {
-
 protected:
     //Basic Stats
     std::string name;
@@ -29,7 +28,10 @@ protected:
     unsigned int _Dexterity;
     unsigned int _Intelligence;
     unsigned int _Luck;
+    Inventory _inventory;
     //
+    //Functions
+    bool Crit(unsigned int);
 public:
     //getFunctions
     const std::string &getName() const;
@@ -49,13 +51,15 @@ public:
     //SetFunctions
     const unsigned int &setHP(unsigned int);
     const unsigned int &setLVL(unsigned int);
+    const unsigned int &setEXP(unsigned int);
+
     //
     //HeroFunctions
     void status();
     Hero *Initialize(std::string, unsigned int);
     void LevelUp();
     virtual void attack(Hero &) = 0;
-    void Travel(); //TODO BARTEK!!!
+    void Travel();
     //
     explicit Hero(std::string name = "Unknown");
     virtual ~Hero();

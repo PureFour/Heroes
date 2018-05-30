@@ -1,6 +1,6 @@
 #include "../include/Enemy.h"
 
-Enemy::Enemy(std::string n) :Hero(n)
+Enemy::Enemy(std::string n, unsigned int ad) :Hero(n)
 {
 
     this->_LVL = 1;
@@ -9,7 +9,7 @@ Enemy::Enemy(std::string n) :Hero(n)
 
     this->_HP = 20;
     this->_MANA = 0;
-    this->_AD = 2;
+    this->_AD = ad;
     this->_AP = 0;
     this->_DEF = 1;
 
@@ -20,9 +20,14 @@ Enemy::Enemy(std::string n) :Hero(n)
     this->_Luck = 0;
 }
 
+std::vector<Enemy*> Enemy::easy = {new Enemy("Dog", 10), new Enemy("Wasp", 15), new Enemy("Bat", 19)};
+std::vector<Enemy*> Enemy::medium = {};
+std::vector<Enemy*> Enemy::hard = {};
+std::vector<Enemy*> Enemy::boss = {new Enemy("Freakin Dog", 100), new Enemy("BIG SHITTY Wasp", 150), new Enemy("BLACK DICK Bat", 190)};
+
 Enemy* Enemy::spawn(std::string difficulty_lvl)
 {
-    unsigned int r = static_cast<unsigned int>((rand() & 5) + 0);
+    auto r = ((rand() & 3) + 0);
     if(difficulty_lvl == "easy") return easy[r];
     if(difficulty_lvl == "medium") return medium[r];
     if(difficulty_lvl == "hard") return hard[r];
@@ -45,6 +50,7 @@ void Enemy::attack(Hero &hero)
         HP -= (damage - defence);
         hero.setHP(HP);
     }
+    if(damage > HP) hero.setHP(0);
     std::cout << getName() << " is Attacking you!\n";
     std::cout << "Received damage: " << ((damage > defence) ? (damage - defence) : 0) << std::endl;
 }

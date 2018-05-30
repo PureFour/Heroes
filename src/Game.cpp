@@ -7,20 +7,49 @@ Game::~Game() {}
 bool &Game::getRunning() { return this->_Running;}
 unsigned int &Game::getOption() { return this->_Option;}
 
+void Game::setRunning()
+{
+    _Running = !getRunning() && true;
+}
+
 void Game::startMessage(std::string &n) const
 {
     std::cout << std::string(77, '=');
     std::cout << "\n\n" <<std::string(30, ' ') << "HEROES - THE GAME\n\n";
-    std::cout << std::string(77, '=') << std::endl;
-    std::cout << "\n\n\n\nThis is the story about..." << "__________\b\b\b\b\b\b\b\b\b\b";
+    std::cout << std::string(77, '=') << "\n\n\n";
+
+    const std::string message = "This is the story about";
+    const int rows = 5;
+    const std::string::size_type cols = message.size() + 5;
+    for(int r = 0; r != rows; ++r)
+    {
+        std::string::size_type c = 0; //char type counter...
+        while(c != cols)
+        {
+            if(c == 0) std::cout <<std::string(25, ' ');
+            if(r == 2 && c == 2)
+            {
+                std::cout << message;
+                c += message.size();
+            }
+            else
+            {
+                if(r == 0 || r == rows - 1 || c == 0 || c == cols -1) std::cout << '*';
+                else std::cout << ' ';
+                ++c;
+            }
+        }
+        std::cout << std::endl;
+    }
+    std::cout << "ENTER YOUR NAME: ";
     std::cin >> n;
     ClearScreen();
 }
 
 void Game::mainMenu(Hero *p)
 {
-    Enemy enemy("DOG");
-
+    Shop *shop_p = nullptr;
+    Enemy *enemy_p = nullptr;
     std::cout << std::string(77, '*') << std::endl;
     std::cout << "\n" <<std::string(32, ' ') <<"-MAIN MENU-\n"<< std::endl;
     std::cout << std::string(77, '*') << std::endl;
@@ -32,9 +61,8 @@ void Game::mainMenu(Hero *p)
     std::cout << "(0) Exit Game"<< std::endl;
     std::cout << std::string(77, '=') << std::endl;
     std::cout << "My Choice:_\b";
-    std::cin >> getOption(); //TODO Zrobic zabezpieczenie na niepoprawny input!
+    getOption() = myInput(6);
     ClearScreen();
-    // Kod na zabezpieczenie!
     switch(getOption())
     {
         case 0:
@@ -42,22 +70,22 @@ void Game::mainMenu(Hero *p)
             break;
         case 1:
             p->status();
-            sleep(2);
+            sleep(1);
             break;
         case 2:
-            enemy.attack(*p);
-            sleep(2);
+            enemy_p = enemy_p->spawn("easy");
+            Fight(*p, *enemy_p);
             break;
         case 3:
-
+            shop_p->Initialize();
             break;
         case 4:
-            p->showInv();
-            sleep(2);
+            InventoryMenu(p);
+            sleep(1);
             break;
         case 5:
             p->LevelUp();
-            sleep(2);
+            sleep(1);
             break;
         default:
             break;
@@ -74,31 +102,62 @@ unsigned int Game::HeroChoice()
     std::cout << "(3) Archer" << std::endl;
     std::cout << std::string(77, '-') << std::endl;
     std::cout << "My Choice:_\b";
-    std::cin >> getOption(); // TODO zabezpieczyc tu rowniez!
+    getOption() = myInput(4); //function from functions.h
     ClearScreen();
     return getOption();
 }
 
 void Game::InventoryMenu(Hero *p)
 {
-    std::cout << "Choose Option!" << std::endl;
-    std::cout << "(1) Show Inventory" << std::endl;
-    std::cout << "(2) Add Item" << std::endl;
-    std::cout << "(3) Remove Item" << std::endl;
-    std::cin >> getOption();
-    switch(getOption())
+    bool running = true;
+    while(running)
     {
-        case 1:
-            p->showInv();
-            break;
-        case 2:
+        std::cout << "Choose Option!" << std::endl;
+        std::cout << "(1) Show Inventory" << std::endl;
+        std::cout << "(2) Add Item" << std::endl;
+        std::cout << "(3) Remove Item" << std::endl;
+        std::cout << "(0) Quit" << std::endl;
+        getOption() = myInput(4);
+        switch(getOption())
+        {
+            case 0:
+                running = false;
+                break;
+            case 1:
+                p->showInv();
+                break;
+            case 2:
 
-            break;
-        case 3:
-
-            break;
-        default:
-            break;
+                break;
+            case 3:
+                std::cin >> getOption();
+                break;
+            default:
+                break;
+        }
     }
 }
 
+void Game::Fight(Hero &hero, Enemy &enemy)
+{
+
+    while(hero.getHP() > 0 && enemy.getHP() > 0)
+    {
+        std::cout << "Hero HP= " <<hero.getHP();
+        std::cout << "Enemy HP = " << enemy.getHP() << std::endl;
+        hero.attack(enemy);
+        sleep(2);
+        enemy.attack(hero);
+    }
+    if(enemy.getHP() <= 0)
+    {
+        std::cout << "Enemy defeated!" << std::endl;
+        hero.setEXP(hero.getEXP() + 100);
+    }
+    else
+    {
+        std::cout << "You have been defeated!" << std::endl;
+       // std::cout << "\n" <<std::string(32, ' ') <<"-GAME OVER-\n"<< std::endl;
+        setRunning();
+    }
+}

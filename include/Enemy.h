@@ -5,12 +5,12 @@
 
 class Enemy :public Hero
 {
-    std::vector<Enemy *> easy;
-    std::vector<Enemy *> medium;
-    std::vector<Enemy *> hard;
-    std::vector<Enemy *> boss;
+    static std::vector<Enemy *> easy;
+    static std::vector<Enemy *> medium;
+    static std::vector<Enemy *> hard;
+    static std::vector<Enemy *> boss;
 public:
-    explicit Enemy(std::string n);
+     Enemy(std::string n, unsigned int);
     ~Enemy();
     void attack(Hero &) override;
     Enemy* spawn(std::string); //dif lvls : easy/medium/hard/BOSS

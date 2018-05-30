@@ -4,7 +4,7 @@ Inventory::Inventory()
 {
     this->_inventory = {};
     this->Size = 0;
-    this->maxSize = 5;
+    this->maxSize = 8;
 }
 Inventory::~Inventory() {}
 
@@ -13,7 +13,7 @@ const void Inventory::showInv() const
     if(Size == 0) std::cout << "Inventory is empty!" << std::endl;
     else
     {
-        for(auto i = 0; i<Size; i++) _inventory[i]->showItem();
+        for(auto i = 0; i < Size; i++) _inventory[i]->showItem();
     }
 }
 
