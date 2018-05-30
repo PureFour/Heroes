@@ -31,4 +31,9 @@ Mage::~Mage()
     std::cout << "Mage destructor works here...\n";
 }
 
+void Mage::equip(Item &)
+{
 
+}
+
+const void Mage::showItems() const {}

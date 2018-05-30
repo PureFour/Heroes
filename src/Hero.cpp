@@ -21,6 +21,8 @@ const unsigned int &Hero::getVit() const { return this->_Vitality; }
 const unsigned int &Hero::getDex() const { return this->_Dexterity; }
 const unsigned int &Hero::getInt() const { return this->_Intelligence; }
 const unsigned int &Hero::getLuck() const { return this->_Luck; }
+const std::array<Item*, 4>& Hero::getArmor() const { return this->_armor; }
+const Item* Hero::getWeapon() const { return this->_weapon; }
 
 const unsigned int& Hero::setHP(unsigned int hp)
 {
@@ -75,17 +77,56 @@ void Hero::status()
 
 void Hero::LevelUp()
 {
-    while(this->_EXP > this->_EXP2NEXTLVL)
+    int points = 0;
+    if (this->_EXP < this->_EXP2NEXTLVL)
+        std::cout << "You don't have enought experience!" << std::endl;
+    else
     {
-        this->_LVL += 1;
-        this->_EXP -= this->_EXP2NEXTLVL;
-        this->_EXP2NEXTLVL = static_cast<unsigned int>( ( (50/3) * ( pow(this->_LVL, 3.0) ) - (6.0 * pow(this->_LVL, 3.0) ) + (17.0 * this->_LVL) - 11.0) ); //LVL^UP FORMULA
+        while (this->_EXP > this->_EXP2NEXTLVL) {
+            this->_LVL += 1;
+            this->_EXP -= this->_EXP2NEXTLVL;
+            this->_EXP2NEXTLVL = static_cast<unsigned int>(((50 / 3) * (pow(this->_LVL, 3.0)) - (6.0 * pow(this->_LVL, 3.0)) + (17.0 * this->_LVL) -
+                                                            11.0)); //LVL^UP FORMULA
+            points += 1;
+        }
+        std::cout << "LVL UP!\nYOUR LV IS " << getLVL() << " NOW!" << std::endl;
     }
-    std::cout << "LVL UP!\nYOUR LV IS " << getLVL() << " NOW!" << std::endl;
+
+    addPoints(points);
 }
 bool Hero::Crit(unsigned int luck)
 {
     return rand() % 100 < 10 * luck;
+}
+
+void Hero::addPoints(int points)
+{
+    while(points)
+    {
+        std::cout << "You can add "<< points << "points to stats!" << std::endl;
+        std::cout << "(1)Strenght: " << getStr() << std::endl;
+        std::cout << "(2)Vitality: " << getVit() << std::endl;
+        std::cout << "(3)Dexterity: " << getDex() << std::endl;
+        std::cout << "(4)Intelligence: " << getInt() << std::endl;
+        std::cout << std::string(50, '-') << std::endl;
+        switch(myInput(4))
+        {
+            case 1:
+                _Strenght += 1;
+                break;
+            case 2:
+                _Vitality += 1;
+                break;
+            case 3:
+                _Dexterity += 1;
+            case 4:
+                _Intelligence += 1;
+                break;
+            default:
+                break;
+        }
+        points -= 1;
+    }
 }
 
 

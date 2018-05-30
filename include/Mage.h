@@ -7,7 +7,8 @@ public:
     explicit Mage(std::string n = "Unknown");
     ~Mage() override;
     void attack(Hero &) override;
-
+    void equip(Item&) override;
+    const void showItems() const override;
 };
 
 #endif //HEROES_MAGE_H

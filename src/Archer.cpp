@@ -19,3 +19,10 @@ Archer::~Archer()
 {
     std::cout << "Archer destructor works here...\n";
 }
+
+void Archer::equip(Item &)
+{
+
+}
+
+const void Archer::showItems() const {}

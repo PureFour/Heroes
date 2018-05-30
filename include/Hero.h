@@ -12,6 +12,9 @@
 class Hero : public Inventory  //BASE CLASS FOR HEROES
 {
 protected:
+    //Hero position on map
+    unsigned int _X;
+    unsigned int _Y;
     //Basic Stats
     std::string name;
     unsigned int _HP;
@@ -28,10 +31,13 @@ protected:
     unsigned int _Dexterity;
     unsigned int _Intelligence;
     unsigned int _Luck;
-    Inventory _inventory;
+    Inventory _inventory; //Hero backpack
+    std::array<Item*, 4> _armor; //helmet, breastplate, shield, boots
+    Item* _weapon;
     //
     //Functions
     bool Crit(unsigned int);
+    void addPoints(int);
 public:
     //getFunctions
     const std::string &getName() const;
@@ -48,6 +54,8 @@ public:
     const unsigned int &getDex() const;
     const unsigned int &getInt() const;
     const unsigned int &getLuck() const;
+    const std::array<Item*, 4> & getArmor() const;
+    const Item* getWeapon() const;
     //SetFunctions
     const unsigned int &setHP(unsigned int);
     const unsigned int &setLVL(unsigned int);
@@ -59,6 +67,8 @@ public:
     Hero *Initialize(std::string, unsigned int);
     void LevelUp();
     virtual void attack(Hero &) = 0;
+    virtual void equip(Item &) = 0;
+    virtual const void showItems() const = 0;
     void Travel();
     //
     explicit Hero(std::string name = "Unknown");

@@ -10,8 +10,7 @@ class Game
     friend class Hero;
     friend class Enemy;
     unsigned int _Option;
-    bool _Running = true;  //FOR WHILE MAIN LOOP
-
+    bool _Running = true;  //FOR MAIN WHILE LOOP
     void Fight(Hero&, Enemy&);
 public:
     Game();
@@ -26,7 +25,7 @@ public:
     //
     void startMessage(std::string&) const;
     unsigned int HeroChoice();
-    void mainMenu(Hero *);
+    void mainMenu(Hero *, Shop *);
     void InventoryMenu(Hero *);
 
 };

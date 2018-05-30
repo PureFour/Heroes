@@ -1,12 +1,11 @@
 #include "../include/Shop.h"
 
-Shop::Shop() {};
+Shop::Shop() {this->shop = {};};
 Shop::~Shop() = default;
 
 void Shop::Initialize()
 {
-    Inventory shop;
-    Armor armor;
-    std::cout << "Shop has been initialized!" << std::endl;
-    shop.showInv();
+    Item sword("sword", "melee weapon", 12, 5);
+    Item shield("shield", "armor", 20, 10);
+    Item cloak;
 }

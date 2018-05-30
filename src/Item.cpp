@@ -14,13 +14,19 @@ Item::~Item()
     std::cout << "Item nr. " << getIndex() << " DELETED" << std::endl;
 }
 
-void Item::showItem()
+const void Item::showItem() const
 {
-    std::cout << "Index: " << getIndex();
-    std::cout << "Type: " << getType();
-    std::cout << "\n Name: " << getName();
-    std::cout << "Buy Value: " << getBuyValue() << std::endl;
-    std::cout << "Sell Value: " << getSellValue() << std::endl;
+    if(this == nullptr) std::cout << "EMPTY" << std::endl;
+    else
+    {
+        std::cout << std::string(50, '+') << std::endl;
+        std::cout << std::setw(48) << "Index: " << getIndex();
+        std::cout << std::setw(20) << "\nType: " << getType();
+        std::cout << std::setw(20) << "\nName: " << getName();
+        std::cout << std::setw(20) << "\nBuy Value: " << getBuyValue();
+        std::cout << std::setw(20) << "\nSell Value: " << getSellValue() << std::endl;
+        std::cout << std::string(50, '-') << std::endl;
+    }
 }
 
 const std::string &Item::getName() const { return this->name;}

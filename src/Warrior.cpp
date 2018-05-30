@@ -3,6 +3,9 @@
 
 Warrior::Warrior(std::string n) : Hero(n)
 {
+    this->_X = 0;
+    this->_Y = 0;
+
     this->_LVL = 1;
     this->_EXP = 0;
     this->_EXP2NEXTLVL = static_cast<unsigned int>( ( (50/3) * ( pow(this->_LVL, 3.0) ) - (6.0 * pow(this->_LVL, 3.0) ) + (17.0 * this->_LVL) - 11.0) ); //LVL^UP FORMULA
@@ -20,6 +23,8 @@ Warrior::Warrior(std::string n) : Hero(n)
     this->_Luck = 5;
 
     this->_inventory = {};
+    this->_armor = {nullptr, nullptr, nullptr, nullptr};
+    this->_weapon = nullptr;
     std::cout << "Warrior constructor works here...\n";
 }
 
@@ -30,26 +35,41 @@ Warrior::~Warrior()
 
 void Warrior::attack(Hero &enemy)
 {
-    unsigned int damage, defence;
+    unsigned int damage, defence, attack;
     unsigned int HP = enemy.getHP();
     defence = ((rand() % (enemy.getDEF() - enemy.getDEF() / 2)) + enemy.getDEF() / 2);
-    damage = ((rand() % (getAD() - getAD() / 2)) + getAD() / 2);
+    attack = ((rand() % (getAD() - getAD() / 2)) + getAD() / 2);
+    damage = attack - defence;
+    std::cout  << this->name << "(Warrior)" << " is performing attack!\n";
     if(Crit(getLuck()))
     {
-        std::cout << "Critical HIT! : " << damage << std::endl;
         damage *= 2;
+        std::cout << "Critical HIT! : " << damage << std::endl;
     }
     else printf("Warrior DMG= %i\n", damage);
     std::cout  << enemy.getName() << " DEF = " << defence << std::endl;
-    std::cout  << this->name << "(Warrior)" << " is performing attack!\n";
+    std::cout  << "Inflicted damage: " << ((damage > defence) ? (damage - defence) : 0) << " to " << enemy.getName() << std::endl;
     if(defence < damage)
     {
         HP -= (damage - defence);
         enemy.setHP(HP);
     }
     if(damage > HP) enemy.setHP(0);
-    std::cout  << "Inflicted damage: " << ((damage > defence) ? (damage - defence) : 0) << " to " << enemy.getName() << std::endl;
-    std::cout  << enemy.getName() << " HP = " << enemy.getHP() << std::endl;
 }
 
+void Warrior::equip(Item &item)
+{
+    std::cout << "I equipping item!" << std::endl;
+    _weapon = &item;
+    _AD = (getAD() + 5);
+}
+
+const void Warrior::showItems() const
+{
+    std::cout << "WARRIOR EQUIPMENT...\n";
+    std::cout << "WARRIOR ARMOR\n";
+    for(auto i = 0; i < _armor.size(); i++) _armor[i] ->showItem();
+    std::cout << "WARRIOR WEAPON\n";
+    _weapon->showItem();
+}
 

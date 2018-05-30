@@ -1,11 +1,11 @@
 #include "Inventory.h"
-#include "Armor.h"
-#ifndef HEROES_SHOP_H
 
+#ifndef HEROES_SHOP_H
 #define HEROES_SHOP_H
 
 class Shop : public Inventory
 {
+    Inventory shop;
 public:
     Shop();
     virtual ~Shop();
