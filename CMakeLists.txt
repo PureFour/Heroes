@@ -12,4 +12,8 @@ add_executable(
         src/Game.cpp include/Game.h
         src/Functions.cpp include/Functions.h
         src/Enemy.cpp include/Enemy.h
-        src/Inventory.cpp include/Inventory.h src/Item.cpp include/Item.h include/Shop.h src/Shop.cpp)
+        src/Inventory.cpp include/Inventory.h
+        src/Item.cpp include/Item.h
+        include/Shop.h src/Shop.cpp)
+
+add_subdirectory(Heroes-Tests)

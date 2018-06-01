@@ -5,11 +5,11 @@
 
 class Shop : public Inventory
 {
-    Inventory shop;
 public:
     Shop();
     virtual ~Shop();
     void Initialize();
+    const void Menu() const;
 
 };
 

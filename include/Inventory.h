@@ -4,6 +4,7 @@
 
 class Inventory
 {
+private:
     std::vector<Item *> _inventory;
     unsigned int Size;
     unsigned int maxSize;

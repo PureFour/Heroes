@@ -7,6 +7,7 @@
 
 class Game
 {
+private:
     friend class Hero;
     friend class Enemy;
     unsigned int _Option;
@@ -25,7 +26,7 @@ public:
     //
     void startMessage(std::string&) const;
     unsigned int HeroChoice();
-    void mainMenu(Hero *, Shop *);
+    void mainMenu(Hero *, Shop *, Enemy *);
     void InventoryMenu(Hero *);
 
 };

@@ -47,9 +47,8 @@ void Game::startMessage(std::string &n) const
     ClearScreen();
 }
 
-void Game::mainMenu(Hero *p, Shop *s)
+void Game::mainMenu(Hero *p, Shop *s, Enemy *e)
 {
-    Enemy *enemy_p = nullptr;
     std::cout << std::string(77, '*') << std::endl;
     std::cout << "\n" <<std::string(32, ' ') <<"-MAIN MENU-\n"<< std::endl;
     std::cout << std::string(77, '*') << std::endl;
@@ -57,7 +56,7 @@ void Game::mainMenu(Hero *p, Shop *s)
     std::cout << "(2) Travel"<< std::endl;
     std::cout << "(3) Shop"<< std::endl;
     std::cout << "(4) Inventory"<< std::endl;
-    std::cout << "(5) LvlUp!"<< std::endl;
+    std::cout << "(5) LvlUp! "<< ((p->getEXP() > p->getEXP2NEXTLVL()) ? "(You can add skill points!)":"") << std::endl;
     std::cout << "(0) Exit Game"<< std::endl;
     std::cout << std::string(77, '=') << std::endl;
     std::cout << "My Choice:_\b";
@@ -73,11 +72,12 @@ void Game::mainMenu(Hero *p, Shop *s)
             sleep(1);
             break;
         case 2:
-            enemy_p = enemy_p->spawn("easy");
-            Fight(*p, *enemy_p);
+            e = e->spawn("medium");
+            Fight(*p, *e);
             break;
         case 3:
             s->Initialize();
+            s->Menu();
             break;
         case 4:
             InventoryMenu(p);
@@ -109,7 +109,7 @@ unsigned int Game::HeroChoice()
 
 void Game::InventoryMenu(Hero *p)
 {
-    Item *item = new Item("SWORD", "melee weapon", 10, 10);
+    Item *item = new Item("SWORD", "weapon", 10, 10);
     bool running = true;
     while(running)
     {
@@ -151,19 +151,19 @@ void Game::Fight(Hero &hero, Enemy &enemy)
         std::cout << "Hero HP= " << hero.getHP() << " |||| ";
         std::cout << "Enemy HP = " << enemy.getHP() << std::endl;
         std::cout << std::string(32, '=') << std::endl;
-        hero.attack(enemy);
+        enemy.attack(hero);
         sleep(2);
         std::cout << std::string(32, '+') << std::endl;
-        enemy.attack(hero);
+        hero.attack(enemy);
         i++;
         std::cout << std::endl;
     }
-    if(enemy.getHP() <= 0)
+    if(enemy.getHP() == 0)
     {
         std::cout << "Enemy defeated!" << std::endl;
-        hero.setEXP(hero.getEXP() + 1000);
+        hero.setEXP(hero.getEXP() + enemy.getEXP());
     }
-    else if(hero.getHP() <= 0)
+    if(hero.getHP() == 0)
     {
         std::cout << "You have been defeated!" << std::endl;
         std::cout << "\n" <<std::string(32, ' ') <<"-GAME OVER-\n"<< std::endl;

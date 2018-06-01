@@ -109,7 +109,7 @@ void Hero::addPoints(int points)
         std::cout << "(3)Dexterity: " << getDex() << std::endl;
         std::cout << "(4)Intelligence: " << getInt() << std::endl;
         std::cout << std::string(50, '-') << std::endl;
-        switch(myInput(4))
+        switch(myInput(5))
         {
             case 1:
                 _Strenght += 1;

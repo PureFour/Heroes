@@ -69,7 +69,7 @@ public:
     virtual void attack(Hero &) = 0;
     virtual void equip(Item &) = 0;
     virtual const void showItems() const = 0;
-    void Travel();
+  //  void Travel();
     //
     explicit Hero(std::string name = "Unknown");
     virtual ~Hero();

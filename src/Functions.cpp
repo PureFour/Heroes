@@ -7,7 +7,7 @@ void ClearScreen()
 
 unsigned int myInput(int options)
 {
-    unsigned int input;
+    unsigned int input = 0;
     std::cin >> input;
     while(!std::cin.good() || input > options - 1 )
     {
