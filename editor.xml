@@ -4,6 +4,6 @@
     <option name="FONT_SCALE" value="1.25" />
   </component>
   <component name="EditorSettings">
-    <option name="USE_SOFT_WRAPS" value="CONSOLE" />
+    <option name="USE_SOFT_WRAPS" value="" />
   </component>
 </application>
