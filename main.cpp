@@ -7,15 +7,16 @@ int main()
     //Initialize main objects
     Game game;
     Hero *pointer = nullptr;
-    Shop *shop_p = nullptr;
     Enemy *enemy_p = nullptr;
+    Shop shop;
+    shop.Initialize();
     //
     std::string Name;
     game.startMessage(Name);
     pointer = pointer->Initialize(Name, game.HeroChoice());
     while(game.getRunning()) //Main Loop...
     {
-        game.mainMenu(pointer, shop_p, enemy_p);
+        game.mainMenu(pointer, &shop, enemy_p);
     }
     return 0;
 }

@@ -10,8 +10,9 @@ private:
     unsigned int maxSize;
 
 public:
-    Inventory();
+    Inventory(unsigned int size = 5);
     virtual ~Inventory();
+    const unsigned int &setSize(unsigned int);
     const void showInv() const;
     const void addItem(Item*);
     const void removeItem(Item*);

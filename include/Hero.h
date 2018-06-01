@@ -9,12 +9,13 @@
 #ifndef HEROES_HERO_H
 #define HEROES_HERO_H
 
-class Hero : public Inventory  //BASE CLASS FOR HEROES
+class Hero   //BASE CLASS FOR HEROES //public: inv
 {
 protected:
     //Hero position on map
     unsigned int _X;
     unsigned int _Y;
+    unsigned int _GOLD;
     //Basic Stats
     std::string name;
     unsigned int _HP;
@@ -40,6 +41,9 @@ protected:
     void addPoints(int);
 public:
     //getFunctions
+    const unsigned int &getX() const;
+    const unsigned int &getY() const;
+    const unsigned int &getGold() const;
     const std::string &getName() const;
     const unsigned int &getHP() const;
     const unsigned int &getMANA() const;
@@ -60,7 +64,7 @@ public:
     const unsigned int &setHP(unsigned int);
     const unsigned int &setLVL(unsigned int);
     const unsigned int &setEXP(unsigned int);
-
+    const unsigned int &setGold(unsigned int);
     //
     //HeroFunctions
     void status();

@@ -12,7 +12,7 @@ class Item
     unsigned int sellValue;
     unsigned int index;
 public:
-    explicit Item(std::string name = "Unknown", std::string type = "Unknown", unsigned int buyValue = 0, unsigned int sellValue = 0);
+    explicit Item(std::string name = "Unknown", std::string type = "Unknown", unsigned int buyValue = 0);
     virtual ~Item();
     //GetFunctions
     const std::string &getName() const;

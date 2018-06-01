@@ -1,11 +1,11 @@
 #include "../include/Item.h"
 
-Item::Item(std::string n, std::string t, unsigned int b, unsigned int s)
+Item::Item(std::string n, std::string t, unsigned int b)
 {
     this->name = n;
     this->type = t;
     this->buyValue = b;
-    this->sellValue = s;
+    this->sellValue = b / 2;
     std::cout << "New Item"<< std::endl;
 }
 

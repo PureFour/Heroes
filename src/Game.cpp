@@ -49,6 +49,7 @@ void Game::startMessage(std::string &n) const
 
 void Game::mainMenu(Hero *p, Shop *s, Enemy *e)
 {
+    Enemy *enemy = new Enemy(" ",1,1, 1, 1);
     std::cout << std::string(77, '*') << std::endl;
     std::cout << "\n" <<std::string(32, ' ') <<"-MAIN MENU-\n"<< std::endl;
     std::cout << std::string(77, '*') << std::endl;
@@ -72,11 +73,10 @@ void Game::mainMenu(Hero *p, Shop *s, Enemy *e)
             sleep(1);
             break;
         case 2:
-            e = e->spawn("medium");
-            Fight(*p, *e);
+            enemy = enemy->spawn("easy");
+            Fight(*p, *enemy);
             break;
         case 3:
-            s->Initialize();
             s->Menu();
             break;
         case 4:
@@ -109,7 +109,6 @@ unsigned int Game::HeroChoice()
 
 void Game::InventoryMenu(Hero *p)
 {
-    Item *item = new Item("SWORD", "weapon", 10, 10);
     bool running = true;
     while(running)
     {
@@ -128,7 +127,7 @@ void Game::InventoryMenu(Hero *p)
                 p->showItems();
                 break;
             case 2:
-                p->equip(*item);
+
                 break;
             case 3:
                 std::cin >> getOption();
@@ -142,7 +141,7 @@ void Game::InventoryMenu(Hero *p)
 void Game::Fight(Hero &hero, Enemy &enemy)
 {
     std::cout << "FIGHT!\n\n" << std::endl;
-
+    unsigned int HP = enemy.getHP();
     int i = 1;
     while(hero.getHP() > 0 && enemy.getHP() > 0)
     {
@@ -162,6 +161,9 @@ void Game::Fight(Hero &hero, Enemy &enemy)
     {
         std::cout << "Enemy defeated!" << std::endl;
         hero.setEXP(hero.getEXP() + enemy.getEXP());
+        unsigned int reward = ((rand() % 20) + 0);
+        hero.setGold(hero.getGold() + reward);
+        std::cout << "Gold earned: " << reward << '!' << std::endl;
     }
     if(hero.getHP() == 0)
     {
@@ -169,5 +171,5 @@ void Game::Fight(Hero &hero, Enemy &enemy)
         std::cout << "\n" <<std::string(32, ' ') <<"-GAME OVER-\n"<< std::endl;
         setRunning();
     }
-    delete &enemy; //cleaning...
+    enemy.setHP(HP); //resetting enemy hp...
 }

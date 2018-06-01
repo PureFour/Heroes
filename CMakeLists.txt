@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.9)
 project(Heroes)
 
+
 set(CMAKE_CXX_STANDARD 11)
 
 add_executable(
@@ -16,4 +17,4 @@ add_executable(
         src/Item.cpp include/Item.h
         include/Shop.h src/Shop.cpp)
 
-add_subdirectory(Heroes-Tests)
+add_subdirectory(Tests)

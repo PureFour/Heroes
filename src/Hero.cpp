@@ -6,6 +6,10 @@
 Hero::Hero(std::string n) :name(std::move(n)) {}
 Hero::~Hero() = default;
 
+const unsigned int& Hero::getX() const { return this->_X; }
+const unsigned int& Hero::getY() const { return this->_Y; }
+const unsigned int& Hero::getGold() const { return this->_GOLD; }
+
 const std::string &Hero::getName() const{ return this->name; }
 const unsigned int &Hero::getHP() const { return this->_HP; }
 const unsigned int &Hero::getMANA() const { return this->_MANA; }
@@ -39,6 +43,11 @@ const unsigned int& Hero::setEXP(unsigned int exp)
     _EXP = exp;
 }
 
+const unsigned int& Hero::setGold(unsigned int gold)
+{
+    _GOLD = gold;
+}
+
 Hero *Hero::Initialize(std::string n, unsigned int choice)
 {
     switch(choice)
@@ -60,6 +69,7 @@ void Hero::status()
     std::cout << "Lvl: " << getLVL() << std::endl;
     std::cout << "Exp: " << getEXP() << std::endl;
     std::cout << "Exp to next Lvl: " << getEXP2NEXTLVL() << std::endl;
+    std::cout << "GOLD: " << getGold() << std::endl;
     std::cout << std::string(50, '-') << std::endl;
     std::cout << "HP: " << getHP() << std::endl;
     std::cout << "MANA: " << getMANA() << std::endl;

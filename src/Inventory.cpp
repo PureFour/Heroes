@@ -1,12 +1,14 @@
 #include "../include/Inventory.h"
 
-Inventory::Inventory()
+Inventory::Inventory(unsigned int size)
 {
     this->_inventory = {};
     this->Size = 0;
-    this->maxSize = 5;
+    this->maxSize = size;
 }
 Inventory::~Inventory() {}
+
+const unsigned int& Inventory::setSize(unsigned int size) { this->maxSize = size; }
 
 const void Inventory::showInv() const
 {

@@ -6,6 +6,7 @@ Warrior::Warrior(std::string n) : Hero(n)
     this->_X = 0;
     this->_Y = 0;
 
+    this->_GOLD = 0;
     this->_LVL = 1;
     this->_EXP = 0;
     this->_EXP2NEXTLVL = static_cast<unsigned int>( ( (50/3) * ( pow(this->_LVL, 3.0) ) - (6.0 * pow(this->_LVL, 3.0) ) + (17.0 * this->_LVL) - 11.0) ); //LVL^UP FORMULA
@@ -22,7 +23,7 @@ Warrior::Warrior(std::string n) : Hero(n)
     this->_Intelligence = 0; // 1 = 25 MANA
     this->_Luck = 5; // 1 = 10% CritChance
 
-    this->_inventory = {};
+   // this->_inventory = {};
     this->_armor = {nullptr, nullptr, nullptr, nullptr};
     this->_weapon = nullptr;
     std::cout << "Warrior constructor works here...\n";
@@ -62,12 +63,11 @@ void Warrior::attack(Hero &enemy)
 
 void Warrior::equip(Item &item)
 {
-    if(item.getType() == "weapon")
+    if(item.getType() == "melee")
     {
         std::cout << "I equipping weapon!" << std::endl;
         _weapon = &item;
         _AD = (getAD() + 5);
-
     }
 }
 

@@ -1,4 +1,3 @@
-
 #include "Hero.h"
 
 #ifndef HEROES_ENEMY_H
