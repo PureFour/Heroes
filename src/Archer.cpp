@@ -20,7 +20,7 @@ Archer::~Archer()
     std::cout << "Archer destructor works here...\n";
 }
 
-void Archer::equip(Item &)
+void Archer::equip()
 {
 
 }

@@ -7,7 +7,7 @@ public:
     explicit Warrior(std::string name = "Unknown");
     ~Warrior() override;
     void attack(Hero &) override;
-    void equip(Item&) override;
+    void equip() override;
     const void showItems() const override;
 };
 

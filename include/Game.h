@@ -10,7 +10,6 @@ class Game
 private:
     friend class Hero;
     friend class Enemy;
-    unsigned int _Option;
     bool _Running = true;  //FOR MAIN WHILE LOOP
     void Fight(Hero&, Enemy&);
 public:
@@ -18,9 +17,6 @@ public:
     virtual ~Game();
     //GetFunctions
     bool &getRunning();
-    unsigned int &getOption();
-    //
-
     //Set Functions
     void setRunning();
     //

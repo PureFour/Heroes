@@ -9,7 +9,7 @@
 #ifndef HEROES_HERO_H
 #define HEROES_HERO_H
 
-class Hero   //BASE CLASS FOR HEROES //public: inv
+class Hero : public Inventory   //BASE CLASS FOR HEROES //public: inv
 {
 protected:
     //Hero position on map
@@ -33,6 +33,7 @@ protected:
     unsigned int _Intelligence;
     unsigned int _Luck;
     Inventory _inventory; //Hero backpack
+    //Hero equipment
     std::array<Item*, 4> _armor; //helmet, breastplate, shield, boots
     Item* _weapon;
     //
@@ -71,7 +72,7 @@ public:
     Hero *Initialize(std::string, unsigned int);
     void LevelUp();
     virtual void attack(Hero &) = 0;
-    virtual void equip(Item &) = 0;
+    virtual void equip() = 0;
     virtual const void showItems() const = 0;
   //  void Travel();
     //

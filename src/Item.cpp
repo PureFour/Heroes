@@ -6,7 +6,6 @@ Item::Item(std::string n, std::string t, unsigned int b)
     this->type = t;
     this->buyValue = b;
     this->sellValue = b / 2;
-    std::cout << "New Item"<< std::endl;
 }
 
 Item::~Item()
@@ -39,5 +38,3 @@ void Item::setIndex(unsigned int i)
 {
     this->index = i;
 }
-
-

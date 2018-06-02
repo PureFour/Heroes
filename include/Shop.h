@@ -1,5 +1,5 @@
 #include "Inventory.h"
-
+#include "Hero.h"
 #ifndef HEROES_SHOP_H
 #define HEROES_SHOP_H
 
@@ -9,7 +9,9 @@ public:
     Shop();
     virtual ~Shop();
     void Initialize();
-    const void Menu() const;
+    const void Menu(Hero *) const;
+    void Buy(Hero *) const;
+    void Sell(Hero *) const;
 
 };
 

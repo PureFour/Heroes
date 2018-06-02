@@ -1,4 +1,5 @@
 #include <iostream>
+#define WIDTH  77
 #ifndef HEROES_FUNCTIONS_H
 #define HEROES_FUNCTIONS_H
 

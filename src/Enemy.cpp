@@ -52,5 +52,5 @@ Enemy* Enemy::spawn(std::string difficulty_lvl)
     if(difficulty_lvl == "BOSS") return boss[r];
 }
 
-void Enemy::equip(Item &) {}
+void Enemy::equip() {}
 const void Enemy::showItems() const {}

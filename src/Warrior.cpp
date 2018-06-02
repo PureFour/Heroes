@@ -6,7 +6,7 @@ Warrior::Warrior(std::string n) : Hero(n)
     this->_X = 0;
     this->_Y = 0;
 
-    this->_GOLD = 0;
+    this->_GOLD = 100;
     this->_LVL = 1;
     this->_EXP = 0;
     this->_EXP2NEXTLVL = static_cast<unsigned int>( ( (50/3) * ( pow(this->_LVL, 3.0) ) - (6.0 * pow(this->_LVL, 3.0) ) + (17.0 * this->_LVL) - 11.0) ); //LVL^UP FORMULA
@@ -24,6 +24,7 @@ Warrior::Warrior(std::string n) : Hero(n)
     this->_Luck = 5; // 1 = 10% CritChance
 
    // this->_inventory = {};
+    //setSize(1); // size of inventory...
     this->_armor = {nullptr, nullptr, nullptr, nullptr};
     this->_weapon = nullptr;
     std::cout << "Warrior constructor works here...\n";
@@ -61,22 +62,65 @@ void Warrior::attack(Hero &enemy)
     }
 }
 
-void Warrior::equip(Item &item)
+void Warrior::equip()
 {
-    if(item.getType() == "melee")
+    if(!full_inventory())
     {
-        std::cout << "I equipping weapon!" << std::endl;
-        _weapon = &item;
+        std::cout << "Inventory is Empty!" << std::endl;
+        return;
+    }
+
+    std::cout << "Enter item index: ";
+    unsigned int index = myInput(getSize());
+
+    if(getItem(index)->getType() == "melee")
+    {
+        std::cout << "I equipping weapon!(+5 AD)" << std::endl;
+        _weapon = getItem(index);
+        removeItem(getItem(index));
         _AD = (getAD() + 5);
+    }
+    if(getItem(index)->getType() == "ranged")
+    {
+        std::cout << "I'm warrior I can't equip bows!" << std::endl;
+        return;
+    }
+    if(getItem(index)->getType() == "magic")
+    {
+        std::cout << "I'm warrior I can't equip wands!" << std::endl;
+        return;
+    }
+    if(getItem(index)->getType() == "helmet")
+    {
+        std::cout << "I equipping helmet!(+5 DEF)" << std::endl;
+        _armor[0] = getItem(index);
+        _DEF = (getDEF() + 5);
+    }
+    if(getItem(index)->getType() == "armor")
+    {
+        std::cout << "I equipping armor!(+15 VIT)" << std::endl;
+        _armor[1] = getItem(index);
+        _Vitality = (getVit() + 15);
+    }
+    if(getItem(index)->getType() == "boots")
+    {
+        std::cout << "I equipping boots!(+5 DEX)" << std::endl;
+        _armor[2] = getItem(index);
+        _Dexterity = (getDex() + 5);
+    }
+    if(getItem(index)->getType() == "shield")
+    {
+        std::cout << "I equipping shield!(+10 DEF)" << std::endl;
+        _armor[3] = getItem(index);
+        _DEF = (getDEF() + 10);
     }
 }
 
 const void Warrior::showItems() const
 {
     std::cout << "WARRIOR EQUIPMENT...\n";
-    std::cout << "WARRIOR ARMOR\n";
-    for(auto i = 0; i < _armor.size(); i++) _armor[i] ->showItem();
+    std::cout << "\nWARRIOR ARMOR\n";
+    for(auto i : _armor) i->showItem();
     std::cout << "WARRIOR WEAPON\n";
     _weapon->showItem();
 }
-

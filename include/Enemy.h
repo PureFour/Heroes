@@ -13,7 +13,7 @@ public:
     Enemy(std::string n, unsigned int, unsigned int, unsigned int, unsigned int);
     ~Enemy();
     void attack(Hero &) override;
-    void equip(Item&) override;
+    void equip() override;
     const void showItems() const override;
     Enemy* spawn(std::string); //dif lvls : easy/medium/hard/BOSS
 };

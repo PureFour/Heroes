@@ -3,7 +3,7 @@
 #include "../include/Mage.h"
 #include "../include/Archer.h"
 
-Hero::Hero(std::string n) :name(std::move(n)) {}
+Hero::Hero(std::string n) :name(std::move(n)) { setSize(2); }
 Hero::~Hero() = default;
 
 const unsigned int& Hero::getX() const { return this->_X; }
