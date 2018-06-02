@@ -1,12 +1,16 @@
 #include "../include/Inventory.h"
 
-Inventory::Inventory()
+Inventory::Inventory(unsigned int size)
 {
     this->_inventory = {};
     this->Size = 0;
-    this->maxSize = 8;
+    this->maxSize = size;
 }
 Inventory::~Inventory() {}
+
+unsigned int& Inventory::getSize() { return this->Size; }
+
+const unsigned int& Inventory::setSize(unsigned int size) { this->maxSize = size; }
 
 const void Inventory::showInv() const
 {
@@ -28,6 +32,11 @@ const void Inventory::addItem(Item *item)
     }
 }
 
+Item* Inventory::getItem(unsigned int index) const
+{
+    return _inventory[index]; // ??
+}
+
 const void Inventory::removeItem(Item *item)
 {
     if(Size == 0) std::cout << "Inventory is empty!" << std::endl;
@@ -37,3 +46,5 @@ const void Inventory::removeItem(Item *item)
         Size -= 1;
     }
 }
+
+const bool Inventory::full_inventory() const { return Size == maxSize; }

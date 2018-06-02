@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <iomanip>
 #ifndef HEROES_ITEM_H
 #define HEROES_ITEM_H
 
@@ -11,7 +12,7 @@ class Item
     unsigned int sellValue;
     unsigned int index;
 public:
-    Item(std::string name = "Unknown", std::string type = "Unknown", unsigned int buyValue = 0, unsigned int sellValue = 0);
+    explicit Item(std::string name = "Unknown", std::string type = "Unknown", unsigned int buyValue = 0);
     virtual ~Item();
     //GetFunctions
     const std::string &getName() const;
@@ -23,7 +24,7 @@ public:
     //SetFunctions
     void setIndex(unsigned int);
     //
-    void showItem();
+    const void showItem()const ;
 };
 
 #endif //HEROES_ITEM_H

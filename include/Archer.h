@@ -7,7 +7,8 @@ public:
     explicit Archer(std::string n = "Unknown");
     ~Archer() override;
     void attack(Hero &) override;
-
+    void equip() override;
+    const void showItems() const override;
 };
 
 #endif //HEROES_ARCHER_H

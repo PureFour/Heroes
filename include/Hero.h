@@ -9,9 +9,13 @@
 #ifndef HEROES_HERO_H
 #define HEROES_HERO_H
 
-class Hero : public Inventory  //BASE CLASS FOR HEROES
+class Hero : public Inventory   //BASE CLASS FOR HEROES //public: inv
 {
 protected:
+    //Hero position on map
+    unsigned int _X;
+    unsigned int _Y;
+    unsigned int _GOLD;
     //Basic Stats
     std::string name;
     unsigned int _HP;
@@ -28,12 +32,19 @@ protected:
     unsigned int _Dexterity;
     unsigned int _Intelligence;
     unsigned int _Luck;
-    Inventory _inventory;
+    Inventory _inventory; //Hero backpack
+    //Hero equipment
+    std::array<Item*, 4> _armor; //helmet, breastplate, shield, boots
+    Item* _weapon;
     //
     //Functions
     bool Crit(unsigned int);
+    void addPoints(int);
 public:
     //getFunctions
+    const unsigned int &getX() const;
+    const unsigned int &getY() const;
+    const unsigned int &getGold() const;
     const std::string &getName() const;
     const unsigned int &getHP() const;
     const unsigned int &getMANA() const;
@@ -48,18 +59,22 @@ public:
     const unsigned int &getDex() const;
     const unsigned int &getInt() const;
     const unsigned int &getLuck() const;
+    const std::array<Item*, 4> & getArmor() const;
+    const Item* getWeapon() const;
     //SetFunctions
     const unsigned int &setHP(unsigned int);
     const unsigned int &setLVL(unsigned int);
     const unsigned int &setEXP(unsigned int);
-
+    const unsigned int &setGold(unsigned int);
     //
     //HeroFunctions
     void status();
     Hero *Initialize(std::string, unsigned int);
     void LevelUp();
     virtual void attack(Hero &) = 0;
-    void Travel();
+    virtual void equip() = 0;
+    virtual const void showItems() const = 0;
+  //  void Travel();
     //
     explicit Hero(std::string name = "Unknown");
     virtual ~Hero();

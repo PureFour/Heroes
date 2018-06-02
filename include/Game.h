@@ -7,26 +7,22 @@
 
 class Game
 {
+private:
     friend class Hero;
     friend class Enemy;
-    unsigned int _Option;
-    bool _Running = true;  //FOR WHILE MAIN LOOP
-
+    bool _Running = true;  //FOR MAIN WHILE LOOP
     void Fight(Hero&, Enemy&);
 public:
     Game();
     virtual ~Game();
     //GetFunctions
     bool &getRunning();
-    unsigned int &getOption();
-    //
-
     //Set Functions
     void setRunning();
     //
     void startMessage(std::string&) const;
     unsigned int HeroChoice();
-    void mainMenu(Hero *);
+    void mainMenu(Hero *, Shop *, Enemy *);
     void InventoryMenu(Hero *);
 
 };

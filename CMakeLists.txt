@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.9)
 project(Heroes)
 
+
 set(CMAKE_CXX_STANDARD 11)
 
 add_executable(
@@ -12,4 +13,8 @@ add_executable(
         src/Game.cpp include/Game.h
         src/Functions.cpp include/Functions.h
         src/Enemy.cpp include/Enemy.h
-        src/Inventory.cpp include/Inventory.h src/Item.cpp include/Item.h include/Armor.h src/Armor.cpp include/Shop.h src/Shop.cpp)
+        src/Inventory.cpp include/Inventory.h
+        src/Item.cpp include/Item.h
+        include/Shop.h src/Shop.cpp)
+
+add_subdirectory(Tests)
