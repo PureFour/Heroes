@@ -3,6 +3,7 @@
 #include <string>
 #include <utility>
 #include <ctime>
+#include <algorithm>
 #include <unistd.h>
 #include <cmath>
 #include "Inventory.h"
@@ -62,10 +63,22 @@ public:
     const std::array<Item*, 4> & getArmor() const;
     const Item* getWeapon() const;
     //SetFunctions
-    const unsigned int &setHP(unsigned int);
-    const unsigned int &setLVL(unsigned int);
-    const unsigned int &setEXP(unsigned int);
-    const unsigned int &setGold(unsigned int);
+    void setName(std::string);
+    void setHP(unsigned int);
+    void setMANA(unsigned int);
+    void setLVL(unsigned int);
+    void setEXP(unsigned int);
+    void setEXP2NEXTLV(unsigned int);
+    void setGold(unsigned int);
+    void setAD(unsigned int);
+    void setAP(unsigned int);
+    void setDEF(unsigned int);
+    void setStr(unsigned int);
+    void setVit(unsigned int);
+    void setDex(unsigned int);
+    void setInt(unsigned int);
+    void setLuck(unsigned int);
+
     //
     //HeroFunctions
     void status();

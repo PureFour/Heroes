@@ -8,7 +8,7 @@ Inventory::Inventory(unsigned int size)
 }
 Inventory::~Inventory() {}
 
-unsigned int& Inventory::getSize() { return this->Size; }
+const unsigned int & Inventory::getSize()const { return this->Size; }
 
 const unsigned int& Inventory::setSize(unsigned int size) { this->maxSize = size; }
 
@@ -35,6 +35,15 @@ const void Inventory::addItem(Item *item)
 Item* Inventory::getItem(unsigned int index) const
 {
     return _inventory[index]; // ??
+}
+
+void Inventory::swapItems(Item *a, Item *b)
+{
+    Item temp;
+    temp = *a;
+    *a = *b;
+    *b = temp;
+    return;
 }
 
 const void Inventory::removeItem(Item *item)

@@ -8,7 +8,7 @@ Warrior::Warrior(std::string n) : Hero(n)
 
     this->_GOLD = 100;
     this->_LVL = 1;
-    this->_EXP = 0;
+    this->_EXP = 20;
     this->_EXP2NEXTLVL = static_cast<unsigned int>( ( (50/3) * ( pow(this->_LVL, 3.0) ) - (6.0 * pow(this->_LVL, 3.0) ) + (17.0 * this->_LVL) - 11.0) ); //LVL^UP FORMULA
 
     this->_HP = 150;
@@ -19,7 +19,7 @@ Warrior::Warrior(std::string n) : Hero(n)
 
     this->_Strenght = 6; // 1 = 2 AD
     this->_Vitality = 6; // 1 = 25 HP
-    this->_Dexterity = 4; // 1 = 1 DEF
+    this->_Dexterity = 4; // 1 = 3 DEF
     this->_Intelligence = 0; // 1 = 25 MANA
     this->_Luck = 5; // 1 = 10% CritChance
 
@@ -30,10 +30,7 @@ Warrior::Warrior(std::string n) : Hero(n)
     std::cout << "Warrior constructor works here...\n";
 }
 
-Warrior::~Warrior()
-{
-    std::cout << "Warrior destructor works here...\n";
-}
+Warrior::~Warrior() { std::cout << "Warrior destructor works here...\n"; }
 
 void Warrior::attack(Hero &enemy)
 {
@@ -62,22 +59,27 @@ void Warrior::attack(Hero &enemy)
     }
 }
 
-void Warrior::equip()
+void Warrior::equip() //TODO cos nie dziala ...
 {
-    if(!full_inventory())
+    if(getSize() == 0)
     {
         std::cout << "Inventory is Empty!" << std::endl;
         return;
     }
 
     std::cout << "Enter item index: ";
-    unsigned int index = myInput(getSize());
+    unsigned int index;
+    std::cin >> index;
 
     if(getItem(index)->getType() == "melee")
     {
         std::cout << "I equipping weapon!(+5 AD)" << std::endl;
-        _weapon = getItem(index);
-        removeItem(getItem(index));
+        if(_weapon == nullptr)
+        {
+            _weapon = getItem(index);
+            removeItem(getItem(index));
+        }
+        else swapItems(_weapon, getItem(index));
         _AD = (getAD() + 5);
     }
     if(getItem(index)->getType() == "ranged")
@@ -93,25 +95,45 @@ void Warrior::equip()
     if(getItem(index)->getType() == "helmet")
     {
         std::cout << "I equipping helmet!(+5 DEF)" << std::endl;
-        _armor[0] = getItem(index);
+        if(_armor[0] == nullptr)
+        {
+            _armor[0] = getItem(index);
+            removeItem(getItem(index));
+        }
+        else swapItems(_armor[0], getItem(index));
         _DEF = (getDEF() + 5);
     }
     if(getItem(index)->getType() == "armor")
     {
         std::cout << "I equipping armor!(+15 VIT)" << std::endl;
-        _armor[1] = getItem(index);
+        if(_armor[1] == nullptr)
+        {
+            _armor[1] = getItem(index);
+            removeItem(getItem(index));
+        }
+        else swapItems(_armor[1], getItem(index));
         _Vitality = (getVit() + 15);
     }
     if(getItem(index)->getType() == "boots")
     {
         std::cout << "I equipping boots!(+5 DEX)" << std::endl;
-        _armor[2] = getItem(index);
+        if(_armor[2] == nullptr)
+        {
+            _armor[2] = getItem(index);
+            removeItem(getItem(index));
+        }
+        else swapItems(_armor[2], getItem(index));
         _Dexterity = (getDex() + 5);
     }
     if(getItem(index)->getType() == "shield")
     {
         std::cout << "I equipping shield!(+10 DEF)" << std::endl;
-        _armor[3] = getItem(index);
+        if(_armor[3] == nullptr)
+        {
+            _armor[3] = getItem(index);
+            removeItem(getItem(index));
+        }
+        else swapItems(_armor[3], getItem(index));
         _DEF = (getDEF() + 10);
     }
 }

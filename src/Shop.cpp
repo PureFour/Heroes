@@ -2,7 +2,7 @@
 
 Shop::Shop()
 {
-    setSize(40);
+    setSize(30);
 }
 Shop::~Shop() = default;
 
@@ -33,11 +33,17 @@ void Shop::Initialize()
     items.push_back(new Item("leather-jacket", "armor", 20));
     items.push_back(new Item("copper-breastplate", "armor", 50));
     items.push_back(new Item("dragon-steel breastplate", "armor", 130));
-    items.push_back(new Item("golden-breastplate", "armor", 250));
+    items.push_back(new Item("golden-breastplate", "armor", 350));
     //boots
-
+    items.push_back(new Item("leather-boots", "boots", 25));
+    items.push_back(new Item("green-light-boots", "boots", 40));
+    items.push_back(new Item("heavy-boots", "boots", 100));
+    items.push_back(new Item("golden-boots", "boots", 150));
     //shields
-
+    items.push_back(new Item("wooden-shield", "shield", 30));
+    items.push_back(new Item("round-shield", "shield", 80));
+    items.push_back(new Item("steel-shield", "shield", 174));
+    items.push_back(new Item("golden-shield", "shield", 250));
     //////////
     for(auto p : items) addItem(p);
     std::cout << "Shop has been initialized!" << std::endl;
@@ -78,9 +84,8 @@ const void Shop::Menu(Hero *hero) const
 
 void Shop::Buy(Hero *hero) const
 {
-    unsigned int index = 0;
     std::cout << "What do you want to buy? (Enter index number)" << std::endl;
-    std::cin >> index; //zabezpieczyc !
+    unsigned int index = myInput(getSize());
     std::cout << "Item " << getItem(index)->getName() << std::endl;
     std::cout << "Item prize: " << getItem(index)->getBuyValue()
     << " Your Gold: " << hero->getGold() << std::endl;
@@ -108,7 +113,6 @@ void Shop::Buy(Hero *hero) const
 }
 void Shop::Sell(Hero *hero) const
 {
-    unsigned int index = 0;
     std::cout << "Hero Backpack\n";
     if(hero->getSize() == 0)
     {
@@ -117,7 +121,7 @@ void Shop::Sell(Hero *hero) const
     }
     else hero->showInv();
     std::cout << "What do you want to sell? (Enter index number)" << std::endl;
-    std::cin >> index; //zabezpieczyc !
+    unsigned int index = myInput(hero->getSize());
     std::cout << "Item " << hero->getItem(index)->getName() << std::endl;
     std::cout << "Item value: " << hero->getItem(index)->getSellValue() << std::endl;
     std::cout << "SELL?\n" << "(1) YES!\n" << "(0) NO...\n";

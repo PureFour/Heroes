@@ -21,24 +21,24 @@ void Enemy::attack(Hero &hero)
     unsigned int HP = hero.getHP();
     defence = ((rand() % (hero.getDEF() - hero.getDEF() / 2)) + hero.getDEF() / 2);
     attack = ((rand() % (getAD() - getAD() / 2)) + getAD() / 2);
-    std::cout << getName() << " is attacking you!\n";
-    std::cout << "My DEF = " << defence << std::endl;
+    std::cout << std::string(23, ' ') << getName() << " is attacking you!\n\n";
+    std::cout << std::string(50, ' ') << "My DEF = " << defence << std::endl;
     if(attack > defence)
     {
         damage = attack - defence;
         if(Crit(getLuck()))
         {
             damage *= 2;
-            std::cout << "Critical HIT! : " << damage << std::endl;
+            std::cout << std::string(50, ' ') << "Critical HIT! : " << damage << std::endl;
         }
-        else printf("Enemy DMG= %i\n", damage);
+        else std::cout << std::string(50, ' ') << "Enemy DMG = " << damage << std::endl;
         if(damage < HP) hero.setHP(HP - damage);
         else hero.setHP(0);
     }
     else
     {
         damage = 0;
-        std::cout << getName() << " missed!\n";
+        std::cout << std::string(50, ' ') << getName() << " missed!\n";
     }
 }
 

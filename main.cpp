@@ -17,6 +17,7 @@ int main()
     while(game.getRunning()) //Main Loop...
     {
         game.mainMenu(pointer, &shop, enemy_p);
+        if(game.getAlive() == false) game.Load(pointer);
     }
     return 0;
 }

@@ -3,7 +3,7 @@
 #include "../include/Mage.h"
 #include "../include/Archer.h"
 
-Hero::Hero(std::string n) :name(std::move(n)) { setSize(2); }
+Hero::Hero(std::string n) :name(std::move(n)) { setSize(5); }
 Hero::~Hero() = default;
 
 const unsigned int& Hero::getX() const { return this->_X; }
@@ -28,25 +28,22 @@ const unsigned int &Hero::getLuck() const { return this->_Luck; }
 const std::array<Item*, 4>& Hero::getArmor() const { return this->_armor; }
 const Item* Hero::getWeapon() const { return this->_weapon; }
 
-const unsigned int& Hero::setHP(unsigned int hp)
-{
-    _HP = hp;
-}
+void Hero::setName(std::string n) { name = n; }
+void Hero::setHP(unsigned int hp) { _HP = hp; }
+void Hero::setMANA(unsigned int mana) { _MANA = mana; }
+void Hero::setLVL(unsigned int lv) { _LVL = lv; }
+void Hero::setEXP(unsigned int exp) { _EXP = exp; }
+void Hero::setEXP2NEXTLV(unsigned int exp2) { _EXP2NEXTLVL = exp2; }
+void Hero::setGold(unsigned int gold) { _GOLD = gold; }
+void Hero::setAD(unsigned int ad) { _AD = ad; }
+void Hero::setAP(unsigned int ap) { _AP = ap; }
+void Hero::setDEF(unsigned int def) { _DEF = def; }
+void Hero::setStr(unsigned int str) { _Strenght = str; }
+void Hero::setVit(unsigned int vit) { _Vitality = vit; }
+void Hero::setDex(unsigned int dex) { _Dexterity = dex; }
+void Hero::setInt(unsigned int _int) { _Intelligence = _int; }
+void Hero::setLuck(unsigned int luck) { _Luck = luck; }
 
-const unsigned int& Hero::setLVL(unsigned int lv)
-{
-    _LVL = lv;
-}
-
-const unsigned int& Hero::setEXP(unsigned int exp)
-{
-    _EXP = exp;
-}
-
-const unsigned int& Hero::setGold(unsigned int gold)
-{
-    _GOLD = gold;
-}
 
 Hero *Hero::Initialize(std::string n, unsigned int choice)
 {
@@ -70,19 +67,19 @@ void Hero::status()
     std::cout << "Exp: " << getEXP() << std::endl;
     std::cout << "Exp to next Lvl: " << getEXP2NEXTLVL() << std::endl;
     std::cout << "GOLD: " << getGold() << std::endl;
-    std::cout << std::string(50, '-') << std::endl;
+    std::cout << std::string(WIDTH, '-') << std::endl;
     std::cout << "HP: " << getHP() << std::endl;
     std::cout << "MANA: " << getMANA() << std::endl;
     std::cout << "AD: " << getAD() << std::endl;
     std::cout << "AP: " << getAP() << std::endl;
     std::cout << "DEF: " << getDEF() << std::endl;
-    std::cout << std::string(50, '-') << std::endl;
+    std::cout << std::string(WIDTH, '-') << std::endl;
     std::cout << "Strenght: " << getStr() << std::endl;
     std::cout << "Vitality: " << getVit() << std::endl;
     std::cout << "Dexterity: " << getDex() << std::endl;
     std::cout << "Intelligence: " << getInt() << std::endl;
     std::cout << "Luck: " << getLuck() << std::endl;
-    std::cout << std::string(50, '-') << std::endl;
+    std::cout << std::string(WIDTH, '-') << std::endl;
 }
 
 void Hero::LevelUp()
@@ -114,23 +111,27 @@ void Hero::addPoints(int points)
     while(points)
     {
         std::cout << "You can add "<< points << "points to stats!" << std::endl;
-        std::cout << "(1)Strenght: " << getStr() << std::endl;
-        std::cout << "(2)Vitality: " << getVit() << std::endl;
-        std::cout << "(3)Dexterity: " << getDex() << std::endl;
-        std::cout << "(4)Intelligence: " << getInt() << std::endl;
-        std::cout << std::string(50, '-') << std::endl;
+        std::cout << "(1)Strenght: " << getStr() << std::setw(20) << "[1 = 2 AD]" << std::endl;
+        std::cout << "(2)Vitality: " << getVit() << std::setw(21) << "[1 = 25 HP]" << std::endl;
+        std::cout << "(3)Dexterity: " << getDex() << std::setw(20) << "[1 = 3 DEF]" << std::endl;
+        std::cout << "(4)Intelligence: " << getInt() << std::setw(19) << "[1 = 25 MANA]" << std::endl;
+        std::cout << std::string(WIDTH, '-') << std::endl;
         switch(myInput(5))
         {
             case 1:
                 _Strenght += 1;
+                _AD += 2;
                 break;
             case 2:
                 _Vitality += 1;
+                _HP += 25;
                 break;
             case 3:
                 _Dexterity += 1;
+                _DEF += 3;
             case 4:
                 _Intelligence += 1;
+                _MANA += 25;
                 break;
             default:
                 break;
