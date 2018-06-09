@@ -11,8 +11,16 @@ class Item
     unsigned int buyValue;
     unsigned int sellValue;
     unsigned int index;
+    //stats
+    unsigned int _ad;
+    unsigned int _ap;
+    unsigned int _def;
+    unsigned int _hp;
+    unsigned int _mana;
+    unsigned int _luck;
+    //
 public:
-    explicit Item(std::string name = "Unknown", std::string type = "Unknown", unsigned int buyValue = 0);
+    explicit Item(std::string name = "Unknown", std::string type = "Unknown", unsigned int buyValue = 0, unsigned int stats = 0);
     virtual ~Item();
     //GetFunctions
     const std::string &getName() const;
@@ -20,6 +28,13 @@ public:
     const unsigned int &getBuyValue() const;
     const unsigned int &getSellValue() const;
     const unsigned int &getIndex() const;
+
+    const unsigned int &getad() const;
+    const unsigned int &getap() const;
+    const unsigned int &getdef() const;
+    const unsigned int &gethp() const;
+    const unsigned int &getmana() const;
+    const unsigned int &getluck() const;
     //
     //SetFunctions
     void setIndex(unsigned int);

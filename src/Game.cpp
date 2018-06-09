@@ -229,7 +229,8 @@ void Game::Fight(Hero &hero, Enemy &enemy)
                         if(hero.removeItem(hero.searchItem("Red-potion")) == 1)
                         {
                             std::cout << "\"Drinking Red potion...\"\n";
-                            hero.setHP(hero.getHP() + 25);
+                            if(25 + hero.getHP() > hero.getMaxHP()) hero.setHP(hero.getMaxHP());
+                            else hero.setHP(hero.getHP() + 25);
                         }
                         else std::cout << "You don't have Red potions!!!";
                         break;
@@ -237,6 +238,7 @@ void Game::Fight(Hero &hero, Enemy &enemy)
                         if(hero.removeItem(hero.searchItem("Blue-potion")) == 1)
                         {
                             std::cout << "\"Drinking Blue potion...\"\n";
+                            if(25 + hero.getMANA() > hero.getMaxMANA()) hero.setMANA(hero.getMaxMANA());
                             hero.setMANA(hero.getMANA() + 25);
                         }
                         else std::cout << "You don't have Blue potions!!!";

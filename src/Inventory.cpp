@@ -17,7 +17,7 @@ const void Inventory::showInv() const
     if(Size == 0) std::cout << "Inventory is empty!" << std::endl;
     else
     {
-        for(auto i = 0; i < Size; i++) _inventory[i]->showItem();
+        for(auto i : _inventory) i->showItem();
     }
 }
 
@@ -52,7 +52,6 @@ void Inventory::swapItems(Item *a, Item *b)
     temp = *a;
     *a = *b;
     *b = temp;
-    return;
 }
 
 int Inventory::removeItem(Item *item)

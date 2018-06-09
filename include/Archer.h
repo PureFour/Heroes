@@ -3,6 +3,7 @@
 
 class Archer :public Hero
 {
+    unsigned int _Arrows;
 public:
     explicit Archer(std::string n = "Unknown");
     ~Archer() override;

@@ -22,7 +22,7 @@ public:
     Item * searchItem(std::string) const;
     const void addItem(Item*);
     void swapItems(Item *, Item *);
-    int removeItem(Item*);
+    int removeItem(Item *);
     const bool full_inventory() const;
 };
 

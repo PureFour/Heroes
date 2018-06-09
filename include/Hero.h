@@ -39,6 +39,7 @@ protected:
     //Hero equipment
     std::array<Item*, 4> _armor; //helmet, breastplate, shield, boots
     Item* _weapon;
+    unsigned int _Arrows;
     //
     //Functions
     bool Crit(unsigned int);
@@ -52,7 +53,7 @@ public:
     const unsigned int &getHP() const;
     const unsigned int &getMaxHP() const;
     const unsigned int &getMANA() const;
-    const unsigned int &getMaxMana() const;
+    const unsigned int &getMaxMANA() const;
     const unsigned int &getAD() const;
     const unsigned int &getAP() const;
     const unsigned int &getDEF() const;
@@ -66,7 +67,7 @@ public:
     const unsigned int &getLuck() const;
     const std::array<Item*, 4> & getArmor() const;
     const Item* getWeapon() const;
-
+    const unsigned int &getArrows() const;
     //SetFunctions
     void setName(std::string);
     void setHP(unsigned int);
@@ -85,7 +86,7 @@ public:
     void setDex(unsigned int);
     void setInt(unsigned int);
     void setLuck(unsigned int);
-
+    void setArrows(unsigned int);
     //
     //HeroFunctions
     void status();

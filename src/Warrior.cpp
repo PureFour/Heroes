@@ -25,10 +25,9 @@ Warrior::Warrior(std::string n) : Hero(n)
     this->_Vitality = 6; // 1 = 25 HP
     this->_Dexterity = 4; // 1 = 3 DEF
     this->_Intelligence = 0; // 1 = 25 MANA
-    this->_Luck = 5; // 1 = 10% CritChance
+    this->_Luck = 2; // 1 = 10% CritChance
 
-   // this->_inventory = {};
-    //setSize(1); // size of inventory...
+    setSize(5); // size of inventory...
     this->_armor = {nullptr, nullptr, nullptr, nullptr};
     this->_weapon = nullptr;
     std::cout << "Warrior constructor works here...\n";
@@ -63,7 +62,7 @@ void Warrior::attack(Hero &enemy)
     }
 }
 
-void Warrior::equip() //TODO cos nie dziala ...
+void Warrior::equip() //TODO cos nie dziala ... zrobic statsy...
 {
     if(getSize() == 0)
     {
@@ -84,7 +83,8 @@ void Warrior::equip() //TODO cos nie dziala ...
             removeItem(getItem(index));
         }
         else swapItems(_weapon, getItem(index));
-        _AD = (getAD() + 5);
+        _AD = (getAD() + getItem(index)->getad());
+        _Luck = (getLuck() + getItem(index)->getluck());
         return;
     }
     if(getItem(index)->getType() == "ranged")
@@ -99,50 +99,53 @@ void Warrior::equip() //TODO cos nie dziala ...
     }
     if(getItem(index)->getType() == "helmet")
     {
-        std::cout << "I equipping helmet!(+5 DEF)" << std::endl;
+        std::cout << "I equipping helmet!(+ "<< getItem(index)->getdef() << " DEF)" << std::endl;
         if(_armor[0] == nullptr)
         {
             _armor[0] = getItem(index);
             removeItem(getItem(index));
         }
         else swapItems(_armor[0], getItem(index));
-        _DEF = (getDEF() + 5);
+        _DEF = (getDEF() + getItem(index)->getdef());
         return;
     }
     if(getItem(index)->getType() == "armor")
     {
-        std::cout << "I equipping armor!(+15 VIT)" << std::endl;
+        std::cout << "I equipping armor! (+ "<< getItem(index)->getdef() << " DEF || + "<< getItem(index)->gethp() << " HP)" << std::endl;
         if(_armor[1] == nullptr)
         {
             _armor[1] = getItem(index);
             removeItem(getItem(index));
         }
         else swapItems(_armor[1], getItem(index));
-        _Vitality = (getVit() + 15);
+        _DEF = (getDEF() + getItem(index)->getdef());
+        _maxHP = (getMaxHP() + getItem(index)->gethp());
         return;
     }
     if(getItem(index)->getType() == "boots")
     {
-        std::cout << "I equipping boots!(+5 DEX)" << std::endl;
+        std::cout << "I equipping boots! (+ "<< getItem(index)->getdef() << " DEF || + "<< getItem(index)->gethp() << " HP)" << std::endl;
         if(_armor[2] == nullptr)
         {
             _armor[2] = getItem(index);
             removeItem(getItem(index));
         }
         else swapItems(_armor[2], getItem(index));
-        _Dexterity = (getDex() + 5);
+        _DEF = (getDEF() + getItem(index)->getdef());
+        _maxHP = (getMaxHP() + getItem(index)->gethp());
         return;
     }
     if(getItem(index)->getType() == "shield")
     {
-        std::cout << "I equipping shield!(+10 DEF)" << std::endl;
+        std::cout << "I equipping shield! (+ "<< getItem(index)->getdef() << " DEF || + "<< getItem(index)->gethp() << " HP)" << std::endl;
         if(_armor[3] == nullptr)
         {
             _armor[3] = getItem(index);
             removeItem(getItem(index));
         }
         else swapItems(_armor[3], getItem(index));
-        _DEF = (getDEF() + 10);
+        _DEF = (getDEF() + getItem(index)->getdef());
+        _maxHP = (getMaxHP() + getItem(index)->gethp());
         return;
     }
 }

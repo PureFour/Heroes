@@ -2,7 +2,7 @@
 
 Shop::Shop()
 {
-    setSize(30);
+    setSize(40);
 }
 Shop::~Shop() = default;
 
@@ -10,43 +10,46 @@ void Shop::Initialize()
 {
     std::vector<Item*> items;
     //melee weapons
-    items.push_back(new Item("sword", "melee", 12));
-    items.push_back(new Item("dagger", "melee", 30));
-    items.push_back(new Item("spear", "melee", 80));
-    items.push_back(new Item("axe", "melee", 100));
-    items.push_back(new Item("hammer", "melee", 150));
+    items.push_back(new Item("sword", "melee", 12, 1));
+    items.push_back(new Item("dagger", "melee", 30, 2));
+    items.push_back(new Item("spear", "melee", 80, 3));
+    items.push_back(new Item("axe", "melee", 100, 4));
+    items.push_back(new Item("hammer", "melee", 150, 5));
     //bows
-    items.push_back(new Item("long-bow", "ranged", 12)); //mozna zmienic typ!
-    items.push_back(new Item("hunters-bow", "ranged", 36));
-    items.push_back(new Item("magic-bow", "ranged", 190));
+    items.push_back(new Item("long-bow", "ranged", 12, 1));
+    items.push_back(new Item("hunters-bow", "ranged", 36, 2));
+    items.push_back(new Item("magic-bow", "ranged", 190, 3));
     //wands
-    items.push_back(new Item("fire-wand", "magic", 10));
-    items.push_back(new Item("water-wand", "magic", 40));
-    items.push_back(new Item("wind-wand", "magic", 150));
-    items.push_back(new Item("earth-wand", "magic", 200));
+    items.push_back(new Item("fire-wand", "magic", 10, 1));
+    items.push_back(new Item("water-wand", "magic", 40, 2));
+    items.push_back(new Item("wind-wand", "magic", 150, 3));
+    items.push_back(new Item("earth-wand", "magic", 200, 4));
     //helmets
-    items.push_back(new Item("leather-cap", "helmet", 8));
-    items.push_back(new Item("steel-helmet", "helmet", 22));
-    items.push_back(new Item("wiking-helmet", "helmet", 56));
-    items.push_back(new Item("knight-helmet", "helmet", 112));
+    items.push_back(new Item("leather-cap", "helmet", 8, 1));
+    items.push_back(new Item("steel-helmet", "helmet", 22, 2));
+    items.push_back(new Item("wiking-helmet", "helmet", 56, 3));
+    items.push_back(new Item("knight-helmet", "helmet", 112, 4));
     //armor
-    items.push_back(new Item("leather-jacket", "armor", 20));
-    items.push_back(new Item("copper-breastplate", "armor", 50));
-    items.push_back(new Item("dragon-steel breastplate", "armor", 130));
-    items.push_back(new Item("golden-breastplate", "armor", 350));
+    items.push_back(new Item("leather-jacket", "armor", 20, 1));
+    items.push_back(new Item("copper-breastplate", "armor", 50, 2));
+    items.push_back(new Item("dragon-steel breastplate", "armor", 130, 3));
+    items.push_back(new Item("golden-breastplate", "armor", 350, 4));
     //boots
-    items.push_back(new Item("leather-boots", "boots", 25));
-    items.push_back(new Item("green-light-boots", "boots", 40));
-    items.push_back(new Item("heavy-boots", "boots", 100));
-    items.push_back(new Item("golden-boots", "boots", 150));
+    items.push_back(new Item("leather-boots", "boots", 25, 1));
+    items.push_back(new Item("green-light-boots", "boots", 40, 2));
+    items.push_back(new Item("heavy-boots", "boots", 100, 3));
+    items.push_back(new Item("golden-boots", "boots", 150, 4));
     //shields
-    items.push_back(new Item("wooden-shield", "shield", 30));
-    items.push_back(new Item("round-shield", "shield", 80));
-    items.push_back(new Item("steel-shield", "shield", 174));
-    items.push_back(new Item("golden-shield", "shield", 250));
+    items.push_back(new Item("wooden-shield", "shield", 30, 1));
+    items.push_back(new Item("round-shield", "shield", 80, 2));
+    items.push_back(new Item("steel-shield", "shield", 174, 3));
+    items.push_back(new Item("golden-shield", "shield", 250, 4));
     //potions
     items.push_back(new Item("Red-potion", "potion", 10));
     items.push_back(new Item("Blue-potion", "potion", 20));
+    //arrows
+    items.push_back(new Item("Wooden-Arrow", "arrow", 2));
+    items.push_back(new Item("Steel-Arrow", "arrow", 5));
     //////////
     for(auto p : items) addItem(p);
     std::cout << "Shop has been initialized!" << std::endl;
@@ -62,7 +65,8 @@ const void Shop::showInv() const
     std::cout << "(5)Boots\n";
     std::cout << "(6)Shields\n";
     std::cout << "(7)Potions\n";
-    switch(myInput(8))
+    std::cout << "(8)Arrows\n";
+    switch(myInput(9))
     {
         case 0:
             std::cout << "Melee weapons\n";
@@ -114,10 +118,17 @@ const void Shop::showInv() const
             }
             break;
         case 7:
-        std::cout << "Potions\n";
+            std::cout << "Potions\n";
             for(auto i : _inventory)
             {
                 if(i->getType() == "potion") i->showItem();
+            }
+            break;
+        case 8:
+            std::cout << "Arrows\n";
+            for(auto i : _inventory)
+            {
+                if(i->getType() == "arrow") i->showItem();
             }
             break;
         default:
@@ -174,11 +185,20 @@ void Shop::Buy(Hero *hero) {
                 std::cout << "Inventory is Full!" << std::endl;
                 return;
             }
-            if (hero->getGold() >= getItem(index)->getBuyValue())
+            if(hero->getGold() >= getItem(index)->getBuyValue())
             {
-                hero->setGold(hero->getGold() - getItem(index)->getBuyValue());
-                hero->addItem(getItem(index));
-                removeItem(getItem(index));
+                if(getItem(index)->getType() == "arrow")
+                {
+                    std::cout << "How much?(max 100)\n";
+                    int amount = myInput(100);
+                    hero->setArrows(hero->getArrows() + amount);
+                    hero->setGold(hero->getGold() - amount * (getItem(index)->getBuyValue()));
+                }
+                else
+                {
+                    hero->setGold(hero->getGold() - getItem(index)->getBuyValue());
+                    hero->addItem(getItem(index));
+                }
                 std::cout << "You bought an item!\n" << "Remaining Gold: " << hero->getGold() << std::endl;
             }
             else std::cout << "You don't have enough money!" << std::endl;
@@ -205,7 +225,6 @@ void Shop::Sell(Hero *hero)
     {
         case 1:
             hero->setGold(hero->getGold() + hero->getItem(index)->getSellValue());
-            hero->removeItem(getItem(index));
             addItem(getItem(index));
             std::cout << "You sold an item!\n" << "Your Gold: " << hero->getGold() << std::endl;
         case 0:

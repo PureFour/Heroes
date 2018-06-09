@@ -1,11 +1,41 @@
 #include "../include/Item.h"
 
-Item::Item(std::string n, std::string t, unsigned int b)
+Item::Item(std::string n, std::string t, unsigned int b, unsigned int stats)
 {
     this->name = n;
     this->type = t;
     this->buyValue = b;
     this->sellValue = b / 2;
+    if(t == "melee" || "ranged")
+    {
+        this->_ad = stats * 3;
+        this->_luck = stats;
+    }
+    if(t == "magic")
+    {
+        this->_ap = stats * 3;
+        this->_mana = stats * 10;
+    }
+    if(t == "helmet")
+    {
+        this->_def = stats;
+    }
+    if(t == "armor")
+    {
+        this->_def = stats * 3;
+        this->_hp = stats * 20;
+    }
+    if(t == "boots")
+    {
+        this->_def = stats;
+        this->_hp = stats * 5;
+    }
+    if(t == "shield")
+    {
+        this->_def = stats * 2;
+        this->_hp = stats * 10;
+    }
+
 }
 
 Item::~Item() {}
@@ -16,11 +46,11 @@ const void Item::showItem() const
     else
     {
         std::cout << std::string(30, '+') << std::endl;
-        std::cout << std::setw(28) << "Index: " << getIndex();
-        std::cout << std::setw(10) << "\nType: " << getType();
-        std::cout << std::setw(10) << "\nName: " << getName();
-        std::cout << std::setw(10) << "\nBuy Value: " << getBuyValue();
-        std::cout << std::setw(10) << "\nSell Value: " << getSellValue() << std::endl;
+        std::cout << std::setw(28) << "Index:" << std::setw(2) << getIndex() << " ||\n";
+        std::cout << "Type: " << getType() << std::setw(static_cast<int>(27 - getType().length())) << " ||";
+        std::cout << "\nName: " << getName() << std::setw(static_cast<int>(27 - getName().length())) << " ||";
+        std::cout << "\nBuy Value:" << std::setw(3) << getBuyValue() << std::setw(20) << " ||";
+        std::cout << "\nSell Value:" << std::setw(3) << getSellValue() << std::setw(19) << " ||" << std::endl;
         std::cout << std::string(30, '-') << std::endl;
     }
 }
@@ -30,6 +60,13 @@ const std::string &Item::getType() const {return this->type;}
 const unsigned int &Item::getBuyValue() const { return this->buyValue; }
 const unsigned int &Item::getSellValue() const { return this->sellValue; }
 const unsigned int &Item::getIndex() const { return this->index; }
+
+const unsigned int& Item::getad() const { return this->_ad; }
+const unsigned int& Item::getap() const { return this->_ap; }
+const unsigned int& Item::getdef() const { return this->_def; }
+const unsigned int& Item::gethp() const { return this->_hp; }
+const unsigned int& Item::getmana() const { return this->_mana; }
+const unsigned int& Item::getluck() const { return this->_luck; }
 
 void Item::setIndex(unsigned int i)
 {

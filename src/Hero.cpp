@@ -14,7 +14,7 @@ const std::string &Hero::getName() const{ return this->name; }
 const unsigned int &Hero::getHP() const { return this->_HP; }
 const unsigned int &Hero::getMaxHP() const { return this->_maxHP; }
 const unsigned int &Hero::getMANA() const { return this->_MANA; }
-const unsigned int &Hero::getMaxMana() const { return this->_maxMANA; }
+const unsigned int &Hero::getMaxMANA() const { return this->_maxMANA; }
 const unsigned int &Hero::getAD() const { return this->_AD; }
 const unsigned int &Hero::getAP() const { return this->_AP; }
 const unsigned int &Hero::getDEF() const { return this->_DEF; }
@@ -29,6 +29,7 @@ const unsigned int &Hero::getInt() const { return this->_Intelligence; }
 const unsigned int &Hero::getLuck() const { return this->_Luck; }
 const std::array<Item*, 4>& Hero::getArmor() const { return this->_armor; }
 const Item* Hero::getWeapon() const { return this->_weapon; }
+const unsigned int& Hero::getArrows() const { return this->_Arrows; }
 
 void Hero::setName(std::string n) { name = n; }
 void Hero::setHP(unsigned int hp) { _HP = hp; }
@@ -47,8 +48,7 @@ void Hero::setVit(unsigned int vit) { _Vitality = vit; }
 void Hero::setDex(unsigned int dex) { _Dexterity = dex; }
 void Hero::setInt(unsigned int _int) { _Intelligence = _int; }
 void Hero::setLuck(unsigned int luck) { _Luck = luck; }
-
-
+void Hero::setArrows(unsigned int arrows) { _Arrows = arrows; }
 Hero *Hero::Initialize(std::string n, unsigned int choice)
 {
     switch(choice)
@@ -73,7 +73,7 @@ void Hero::status()
     std::cout << "GOLD: " << getGold() << std::endl;
     std::cout << std::string(WIDTH, '-') << std::endl;
     std::cout << "HP: " << getHP() << "/" << getMaxHP() << std::endl;
-    std::cout << "MANA: " << getMANA() << "/" << getMaxMana() << std::endl;
+    std::cout << "MANA: " << getMANA() << "/" << getMaxMANA() << std::endl;
     std::cout << "AD: " << getAD() << std::endl;
     std::cout << "AP: " << getAP() << std::endl;
     std::cout << "DEF: " << getDEF() << std::endl;
