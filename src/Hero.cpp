@@ -12,7 +12,9 @@ const unsigned int& Hero::getGold() const { return this->_GOLD; }
 
 const std::string &Hero::getName() const{ return this->name; }
 const unsigned int &Hero::getHP() const { return this->_HP; }
+const unsigned int &Hero::getMaxHP() const { return this->_maxHP; }
 const unsigned int &Hero::getMANA() const { return this->_MANA; }
+const unsigned int &Hero::getMaxMana() const { return this->_maxMANA; }
 const unsigned int &Hero::getAD() const { return this->_AD; }
 const unsigned int &Hero::getAP() const { return this->_AP; }
 const unsigned int &Hero::getDEF() const { return this->_DEF; }
@@ -30,7 +32,9 @@ const Item* Hero::getWeapon() const { return this->_weapon; }
 
 void Hero::setName(std::string n) { name = n; }
 void Hero::setHP(unsigned int hp) { _HP = hp; }
+void Hero::setMaxHP(unsigned int max) { _maxHP = max; }
 void Hero::setMANA(unsigned int mana) { _MANA = mana; }
+void Hero::setMaxMANA(unsigned int max) { _maxMANA = max; }
 void Hero::setLVL(unsigned int lv) { _LVL = lv; }
 void Hero::setEXP(unsigned int exp) { _EXP = exp; }
 void Hero::setEXP2NEXTLV(unsigned int exp2) { _EXP2NEXTLVL = exp2; }
@@ -49,11 +53,11 @@ Hero *Hero::Initialize(std::string n, unsigned int choice)
 {
     switch(choice)
     {
-        case 1:
+        case 0:
             return new Warrior(n);
-        case 2:
+        case 1:
             return new Mage(n);
-        case 3:
+        case 2:
             return new Archer(n);
         default:
             break;
@@ -68,8 +72,8 @@ void Hero::status()
     std::cout << "Exp to next Lvl: " << getEXP2NEXTLVL() << std::endl;
     std::cout << "GOLD: " << getGold() << std::endl;
     std::cout << std::string(WIDTH, '-') << std::endl;
-    std::cout << "HP: " << getHP() << std::endl;
-    std::cout << "MANA: " << getMANA() << std::endl;
+    std::cout << "HP: " << getHP() << "/" << getMaxHP() << std::endl;
+    std::cout << "MANA: " << getMANA() << "/" << getMaxMana() << std::endl;
     std::cout << "AD: " << getAD() << std::endl;
     std::cout << "AP: " << getAP() << std::endl;
     std::cout << "DEF: " << getDEF() << std::endl;
@@ -124,14 +128,14 @@ void Hero::addPoints(int points)
                 break;
             case 2:
                 _Vitality += 1;
-                _HP += 25;
+                _maxHP += 25;
                 break;
             case 3:
                 _Dexterity += 1;
                 _DEF += 3;
             case 4:
                 _Intelligence += 1;
-                _MANA += 25;
+                _maxMANA += 25;
                 break;
             default:
                 break;

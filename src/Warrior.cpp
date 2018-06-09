@@ -11,8 +11,12 @@ Warrior::Warrior(std::string n) : Hero(n)
     this->_EXP = 20;
     this->_EXP2NEXTLVL = static_cast<unsigned int>( ( (50/3) * ( pow(this->_LVL, 3.0) ) - (6.0 * pow(this->_LVL, 3.0) ) + (17.0 * this->_LVL) - 11.0) ); //LVL^UP FORMULA
 
-    this->_HP = 150;
+
+    this->_HP = 100;
+    this->_maxHP = _HP;
+
     this->_MANA = 0;
+    this->_maxMANA = _MANA;
     this->_AD = 12;
     this->_AP = 0;
     this->_DEF = 10;
@@ -81,6 +85,7 @@ void Warrior::equip() //TODO cos nie dziala ...
         }
         else swapItems(_weapon, getItem(index));
         _AD = (getAD() + 5);
+        return;
     }
     if(getItem(index)->getType() == "ranged")
     {
@@ -102,6 +107,7 @@ void Warrior::equip() //TODO cos nie dziala ...
         }
         else swapItems(_armor[0], getItem(index));
         _DEF = (getDEF() + 5);
+        return;
     }
     if(getItem(index)->getType() == "armor")
     {
@@ -113,6 +119,7 @@ void Warrior::equip() //TODO cos nie dziala ...
         }
         else swapItems(_armor[1], getItem(index));
         _Vitality = (getVit() + 15);
+        return;
     }
     if(getItem(index)->getType() == "boots")
     {
@@ -124,6 +131,7 @@ void Warrior::equip() //TODO cos nie dziala ...
         }
         else swapItems(_armor[2], getItem(index));
         _Dexterity = (getDex() + 5);
+        return;
     }
     if(getItem(index)->getType() == "shield")
     {
@@ -135,14 +143,30 @@ void Warrior::equip() //TODO cos nie dziala ...
         }
         else swapItems(_armor[3], getItem(index));
         _DEF = (getDEF() + 10);
+        return;
     }
 }
 
 const void Warrior::showItems() const
 {
-    std::cout << "WARRIOR EQUIPMENT...\n";
-    std::cout << "\nWARRIOR ARMOR\n";
-    for(auto i : _armor) i->showItem();
-    std::cout << "WARRIOR WEAPON\n";
+    std::cout << std::string(WIDTH, 'X') << std::endl;
+    std::cout << std::string(30, ' ') << "WARRIOR EQUIPMENT\n";
+    std::cout << std::string(WIDTH, 'X') << std::endl;
+    std::cout << std::string(8, ' ') << "WARRIOR WEAPON\n";
     _weapon->showItem();
+    std::cout << std::string(WIDTH, 'x') << std::endl;
+    std::cout << std::string(8, ' ') << "HELMET\n";
+    _armor[0]->showItem();
+    std::cout << std::string(WIDTH, 'x') << std::endl;
+    std::cout << std::string(8, ' ') << "BREASTPLATE\n";
+    _armor[1]->showItem();
+    std::cout << std::string(WIDTH, 'x') << std::endl;
+    std::cout << std::string(8, ' ') << "BOOTS\n";
+    _armor[2]->showItem();
+    std::cout << std::string(WIDTH, 'x') << std::endl;
+    std::cout << std::string(8, ' ') << "SHIELD\n";
+    _armor[3]->showItem();
+    std::cout << std::string(WIDTH, 'x') << std::endl;
+    std::cout << std::endl;
+    std::cout << std::string(WIDTH, 'X') << std::endl;
 }

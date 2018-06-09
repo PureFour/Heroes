@@ -21,6 +21,15 @@ const void Inventory::showInv() const
     }
 }
 
+Item * Inventory::searchItem(std::string name) const
+{
+    for(auto i : _inventory)
+    {
+        if(i->getName() == name)
+            return i;
+    }
+}
+
 const void Inventory::addItem(Item *item)
 {
     if(Size == maxSize) std::cout << "Inventory is Full!" << std::endl;
@@ -46,13 +55,14 @@ void Inventory::swapItems(Item *a, Item *b)
     return;
 }
 
-const void Inventory::removeItem(Item *item)
+int Inventory::removeItem(Item *item)
 {
     if(Size == 0) std::cout << "Inventory is empty!" << std::endl;
     else
     {
-        _inventory.erase(_inventory.begin() + item->getIndex()); //TODO memory leaks ????? Check it!
+        _inventory.erase(_inventory.begin() + item->getIndex()); //TODO moze byc zle ??
         Size -= 1;
+        return 1;
     }
 }
 

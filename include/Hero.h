@@ -20,7 +20,9 @@ protected:
     //Basic Stats
     std::string name;
     unsigned int _HP;
+    unsigned int _maxHP;
     unsigned int _MANA;
+    unsigned int _maxMANA;
     unsigned int _AD;
     unsigned int _AP; //Magic DMG
     unsigned int _DEF;
@@ -48,7 +50,9 @@ public:
     const unsigned int &getGold() const;
     const std::string &getName() const;
     const unsigned int &getHP() const;
+    const unsigned int &getMaxHP() const;
     const unsigned int &getMANA() const;
+    const unsigned int &getMaxMana() const;
     const unsigned int &getAD() const;
     const unsigned int &getAP() const;
     const unsigned int &getDEF() const;
@@ -62,10 +66,13 @@ public:
     const unsigned int &getLuck() const;
     const std::array<Item*, 4> & getArmor() const;
     const Item* getWeapon() const;
+
     //SetFunctions
     void setName(std::string);
     void setHP(unsigned int);
+    void setMaxHP(unsigned int);
     void setMANA(unsigned int);
+    void setMaxMANA(unsigned int);
     void setLVL(unsigned int);
     void setEXP(unsigned int);
     void setEXP2NEXTLV(unsigned int);

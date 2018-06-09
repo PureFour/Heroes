@@ -158,9 +158,9 @@ unsigned int Game::HeroChoice()
 {
     std::cout << std::string(WIDTH, '-') << std::endl;
     std::cout << "Choose Hero Class!" << std::endl;
-    std::cout << "(1) Warrior" << std::endl;
-    std::cout << "(2) Mage" << std::endl;
-    std::cout << "(3) Archer" << std::endl;
+    std::cout << "(0) Warrior" << std::endl;
+    std::cout << "(1) Mage" << std::endl;
+    std::cout << "(2) Archer" << std::endl;
     std::cout << std::string(WIDTH, '-') << std::endl;
     std::cout << "My Choice:_\b";
     return myInput(3); //function from functions.h
@@ -221,10 +221,36 @@ void Game::Fight(Hero &hero, Enemy &enemy)
                 sleep(2);
                 break;
             case 1:
-                std::cout << "\"Drinking potion...\"\n";
-                break;
+                std::cout << "Choose potion...\n";
+                std::cout << "(0)Red Potion [+ 25 HP]\n (1)Blue Potion [+ 25 MANA]\n";
+                switch(myInput(2))
+                {
+                    case 0:
+                        if(hero.removeItem(hero.searchItem("Red-potion")) == 1)
+                        {
+                            std::cout << "\"Drinking Red potion...\"\n";
+                            hero.setHP(hero.getHP() + 25);
+                        }
+                        else std::cout << "You don't have Red potions!!!";
+                        break;
+                    case 1:
+                        if(hero.removeItem(hero.searchItem("Blue-potion")) == 1)
+                        {
+                            std::cout << "\"Drinking Blue potion...\"\n";
+                            hero.setMANA(hero.getMANA() + 25);
+                        }
+                        else std::cout << "You don't have Blue potions!!!";
+                        break;
+                    default:
+                        break;
+                }
             case 2:
-                return;
+                if(hero.getHP() < 25)
+                {
+                    std::cout << "You ran away!\n";
+                    return;
+                }
+                continue;
             default:
                 break;
         }

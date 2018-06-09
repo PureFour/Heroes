@@ -9,9 +9,10 @@ public:
     Shop();
     virtual ~Shop();
     void Initialize();
-    const void Menu(Hero *) const;
-    void Buy(Hero *) const;
-    void Sell(Hero *) const;
+    const void Menu(Hero *);
+    const void showInv() const override;
+    void Buy(Hero *);
+    void Sell(Hero *);
 
 };
 

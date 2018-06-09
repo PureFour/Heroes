@@ -44,12 +44,89 @@ void Shop::Initialize()
     items.push_back(new Item("round-shield", "shield", 80));
     items.push_back(new Item("steel-shield", "shield", 174));
     items.push_back(new Item("golden-shield", "shield", 250));
+    //potions
+    items.push_back(new Item("Red-potion", "potion", 10));
+    items.push_back(new Item("Blue-potion", "potion", 20));
     //////////
     for(auto p : items) addItem(p);
     std::cout << "Shop has been initialized!" << std::endl;
 }
 
-const void Shop::Menu(Hero *hero) const
+const void Shop::showInv() const
+{
+    std::cout << "(0)Melee weapons\n";
+    std::cout << "(1)Ranged weapons\n";
+    std::cout << "(2)Magic weapons\n";
+    std::cout << "(3)Helmets\n";
+    std::cout << "(4)Armor\n";
+    std::cout << "(5)Boots\n";
+    std::cout << "(6)Shields\n";
+    std::cout << "(7)Potions\n";
+    switch(myInput(8))
+    {
+        case 0:
+            std::cout << "Melee weapons\n";
+            for(auto i : _inventory)
+            {
+                if(i->getType() == "melee") i->showItem();
+            }
+            break;
+        case 1:
+            std::cout << "Ranged weapons\n";
+            for(auto i : _inventory)
+            {
+                if(i->getType() == "ranged") i->showItem();
+            }
+            break;
+        case 2:
+            std::cout << "Magic weapons\n";
+            for(auto i : _inventory)
+            {
+                if(i->getType() == "magic") i->showItem();
+            }
+            break;
+        case 3:
+            std::cout << "Helmets\n";
+            for(auto i : _inventory)
+            {
+                if(i->getType() == "helmet") i->showItem();
+            }
+            break;
+        case 4:
+            std::cout << "Armor\n";
+            for(auto i : _inventory)
+            {
+                if(i->getType() == "armor") i->showItem();
+            }
+            break;
+        case 5:
+            std::cout << "Boots\n";
+            for(auto i : _inventory)
+            {
+                if(i->getType() == "boots") i->showItem();
+            }
+            break;
+        case 6:
+            std::cout << "Shields\n";
+            for(auto i : _inventory)
+            {
+                if(i->getType() == "shield") i->showItem();
+            }
+            break;
+        case 7:
+        std::cout << "Potions\n";
+            for(auto i : _inventory)
+            {
+                if(i->getType() == "potion") i->showItem();
+            }
+            break;
+        default:
+            break;
+
+    }
+}
+
+const void Shop::Menu(Hero *hero) //TODO naprawic sklep i eq!
 {
     bool running = true;
     while(running)
@@ -57,7 +134,7 @@ const void Shop::Menu(Hero *hero) const
         std::cout << std::string(WIDTH, '=') << "\n\n";
         std::cout << std::string(30, ' ') << "Welcome in my shop!\n" << std::endl;
         std::cout << std::string(WIDTH, '=') << std::endl;
-        std::cout << "What do you want?" << std::endl;
+        std::cout << "What do you want?" << " YOUR GOLD: " << hero->getGold() << std::endl;
         std::cout << "(1) SHOW ITEMS" << std::endl;
         std::cout << "(2) BUY ITEM" << std::endl;
         std::cout << "(3) SELL ITEM" << std::endl;
@@ -82,8 +159,7 @@ const void Shop::Menu(Hero *hero) const
     }
 }
 
-void Shop::Buy(Hero *hero) const
-{
+void Shop::Buy(Hero *hero) {
     std::cout << "What do you want to buy? (Enter index number)" << std::endl;
     unsigned int index = myInput(getSize());
     std::cout << "Item " << getItem(index)->getName() << std::endl;
@@ -98,10 +174,11 @@ void Shop::Buy(Hero *hero) const
                 std::cout << "Inventory is Full!" << std::endl;
                 return;
             }
-            if (hero->getGold() > getItem(index)->getBuyValue())
+            if (hero->getGold() >= getItem(index)->getBuyValue())
             {
                 hero->setGold(hero->getGold() - getItem(index)->getBuyValue());
                 hero->addItem(getItem(index));
+                removeItem(getItem(index));
                 std::cout << "You bought an item!\n" << "Remaining Gold: " << hero->getGold() << std::endl;
             }
             else std::cout << "You don't have enough money!" << std::endl;
@@ -111,11 +188,10 @@ void Shop::Buy(Hero *hero) const
             break;
     }
 }
-void Shop::Sell(Hero *hero) const
+void Shop::Sell(Hero *hero)
 {
     std::cout << "Hero Backpack\n";
-    if(hero->getSize() == 0)
-    {
+    if(hero->getSize() == 0) {
         std::cout << "Inventory is Empty!" << std::endl;
         return;
     }
@@ -130,6 +206,7 @@ void Shop::Sell(Hero *hero) const
         case 1:
             hero->setGold(hero->getGold() + hero->getItem(index)->getSellValue());
             hero->removeItem(getItem(index));
+            addItem(getItem(index));
             std::cout << "You sold an item!\n" << "Your Gold: " << hero->getGold() << std::endl;
         case 0:
             break;

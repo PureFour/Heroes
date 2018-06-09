@@ -8,23 +8,20 @@ Item::Item(std::string n, std::string t, unsigned int b)
     this->sellValue = b / 2;
 }
 
-Item::~Item()
-{
-    std::cout << "Item nr. " << getIndex() << " DELETED" << std::endl;
-}
+Item::~Item() {}
 
 const void Item::showItem() const
 {
     if(this == nullptr) std::cout << "EMPTY" << std::endl;
     else
     {
-        std::cout << std::string(50, '+') << std::endl;
-        std::cout << std::setw(48) << "Index: " << getIndex();
-        std::cout << std::setw(20) << "\nType: " << getType();
-        std::cout << std::setw(20) << "\nName: " << getName();
-        std::cout << std::setw(20) << "\nBuy Value: " << getBuyValue();
-        std::cout << std::setw(20) << "\nSell Value: " << getSellValue() << std::endl;
-        std::cout << std::string(50, '-') << std::endl;
+        std::cout << std::string(30, '+') << std::endl;
+        std::cout << std::setw(28) << "Index: " << getIndex();
+        std::cout << std::setw(10) << "\nType: " << getType();
+        std::cout << std::setw(10) << "\nName: " << getName();
+        std::cout << std::setw(10) << "\nBuy Value: " << getBuyValue();
+        std::cout << std::setw(10) << "\nSell Value: " << getSellValue() << std::endl;
+        std::cout << std::string(30, '-') << std::endl;
     }
 }
 
