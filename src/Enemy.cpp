@@ -8,10 +8,10 @@ Enemy::Enemy(std::string n, unsigned int ad, unsigned int def, unsigned int hp, 
     this->_DEF = def;
 }
 
-std::vector<Enemy*> Enemy::easy = {new Enemy("Dog", 5, 1, 10, 20), new Enemy("Swarm of wasp", 10, 2, 15, 30), new Enemy("Bat", 15, 5, 20, 40)};
-std::vector<Enemy*> Enemy::medium = {new Enemy("Orc", 25, 10, 20, 50), new Enemy("Great Knight", 30, 12, 25, 60), new Enemy("Paladin", 35, 14, 40, 80)};
-std::vector<Enemy*> Enemy::hard = {new Enemy("Black Elf", 40, 15, 20, 80), new Enemy("Big Lizard", 30, 20, 80, 100), new Enemy("King of monkeys", 50, 24, 100, 150)};
-std::vector<Enemy*> Enemy::boss = {new Enemy("Freakin Dog!", 100, 50, 200, 200), new Enemy("BIG Black Wolf!", 150, 55, 300, 400), new Enemy("RED Bat!", 200, 100, 500, 500)};
+std::vector<Enemy*> Enemy::easy = {new Enemy("Dog", 5, 1, 10, 20), new Enemy("Swarm of wasp", 10, 2, 15, 40), new Enemy("Bat", 15, 5, 20, 80)};
+std::vector<Enemy*> Enemy::medium = {new Enemy("Orc", 25, 10, 20, 150), new Enemy("Great Knight", 30, 12, 25, 200), new Enemy("Paladin", 35, 14, 40, 250)};
+std::vector<Enemy*> Enemy::hard = {new Enemy("Black Elf", 40, 15, 20, 500), new Enemy("Big Lizard", 30, 20, 80, 1000), new Enemy("King of monkeys", 50, 24, 100, 1500)};
+std::vector<Enemy*> Enemy::boss = {new Enemy("Freakin Dog!", 100, 50, 200, 5000), new Enemy("BIG Black Wolf!", 150, 55, 300, 7500), new Enemy("RED Bat!", 200, 100, 500, 10000)};
 
 Enemy::~Enemy() {}
 

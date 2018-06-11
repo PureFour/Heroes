@@ -61,7 +61,7 @@ const void Game::Load(Hero *hero)
             file >> stat; hero->setDex(stat);
             file >> stat; hero->setInt(stat);
             file >> stat; hero->setLuck(stat);
-            setRunning();
+            if(!getRunning()) setRunning();
             _Alive = true;
             break;
         default:
@@ -114,11 +114,12 @@ void Game::mainMenu(Hero *p, Shop *s, Enemy *e)
     std::cout << "(4) Inventory"<< std::endl;
     std::cout << "(5) LvlUp! "<< ((p->getEXP() > p->getEXP2NEXTLVL()) ? "(You can add skill points!)":"") << std::endl;
     std::cout << "(6) Save Game"<< std::endl;
+    std::cout << "(7) Load Game"<< std::endl;
     std::cout << "(0) Exit Game"<< std::endl;
     std::cout << std::string(WIDTH, '=') << std::endl;
     std::cout << "My Choice:_\b";
     std::string opc;
-    switch(myInput(7))
+    switch(myInput(8))
     {
         case 0:
             this->_Running = false;
@@ -149,6 +150,9 @@ void Game::mainMenu(Hero *p, Shop *s, Enemy *e)
         case 6:
             Save(p);
             break;
+        case 7:
+            Load(p);
+            break;
         default:
             break;
     }
@@ -174,7 +178,7 @@ void Game::InventoryMenu(Hero *p)
         std::cout << "Choose Option!" << std::endl;
         std::cout << "(1) SHOW EQUIPMENT" << std::endl;
         std::cout << "(2) SHOW INVENTORY" << std::endl;
-        std::cout << "(3) EQUIP ITEM" << std::endl;
+        std::cout << "(3) EQUIP/USE ITEM" << std::endl;
         std::cout << "(0) QUIT" << std::endl;
         switch(myInput(4))
         {

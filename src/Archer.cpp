@@ -85,15 +85,19 @@ void Archer::equip()
     }
     if(getItem(index)->getType() == "ranged")
     {
-        std::cout << "I equipping weapon!(+5 AD)" << std::endl;
         if(_weapon == nullptr)
         {
+            std::cout << "I equipping weapon!(+ " << getItem(index)->getad() << " AD || + "<< getItem(index)->getluck() << " LUCK)" << std::endl;
             _weapon = getItem(index);
+            _AD += getItem(index)->getad();
+            _Luck += getItem(index)->getluck();
             removeItem(getItem(index));
         }
-        else swapItems(_weapon, getItem(index));
-        _AD = (getAD() + getItem(index)->getad());
-        _Luck = (getLuck() + getItem(index)->getluck());
+        else
+        {
+            updateStats(getItem(index), _weapon);
+            swapItems(getItem(index), _weapon);
+        }
         return;
     }
     if(getItem(index)->getType() == "magic")
@@ -103,53 +107,84 @@ void Archer::equip()
     }
     if(getItem(index)->getType() == "helmet")
     {
-        std::cout << "I equipping helmet!(+ "<< getItem(index)->getdef() << " DEF)" << std::endl;
         if(_armor[0] == nullptr)
         {
+            std::cout << "I equipping helmet!(+ "<< getItem(index)->getdef() << " DEF)" << std::endl;
             _armor[0] = getItem(index);
+            _DEF = (getDEF() + getItem(index)->getdef());
             removeItem(getItem(index));
         }
-        else swapItems(_armor[0], getItem(index));
-        _DEF = (getDEF() + getItem(index)->getdef());
+        else
+        {
+            updateStats(getItem(index), _armor[0]);
+            swapItems(getItem(index), _armor[0]);
+        }
         return;
     }
     if(getItem(index)->getType() == "armor")
     {
-        std::cout << "I equipping armor! (+ "<< getItem(index)->getdef() << " DEF || + "<< getItem(index)->gethp() << " HP)" << std::endl;
         if(_armor[1] == nullptr)
         {
+            std::cout << "I equipping armor! (+ "<< getItem(index)->getdef() << " DEF || + "<< getItem(index)->gethp() << " HP)" << std::endl;
             _armor[1] = getItem(index);
+            _DEF = (getDEF() + getItem(index)->getdef());
+            _maxHP = (getMaxHP() + getItem(index)->gethp());
             removeItem(getItem(index));
         }
-        else swapItems(_armor[1], getItem(index));
-        _DEF = (getDEF() + getItem(index)->getdef());
-        _maxHP = (getMaxHP() + getItem(index)->gethp());
+        else
+        {
+            updateStats(getItem(index), _armor[1]);
+            swapItems(getItem(index), _armor[1]);
+        }
         return;
     }
     if(getItem(index)->getType() == "boots")
     {
-        std::cout << "I equipping boots! (+ "<< getItem(index)->getdef() << " DEF || + "<< getItem(index)->gethp() << " HP)" << std::endl;
         if(_armor[2] == nullptr)
         {
+            std::cout << "I equipping boots! (+ "<< getItem(index)->getdef() << " DEF || + "<< getItem(index)->gethp() << " HP)" << std::endl;
             _armor[2] = getItem(index);
+            _DEF = (getDEF() + getItem(index)->getdef());
+            _maxHP = (getMaxHP() + getItem(index)->gethp());
             removeItem(getItem(index));
         }
-        else swapItems(_armor[2], getItem(index));
-        _DEF = (getDEF() + getItem(index)->getdef());
-        _maxHP = (getMaxHP() + getItem(index)->gethp());
+        else
+        {
+            updateStats(getItem(index), _armor[2]);
+            swapItems(getItem(index), _armor[2]);
+        }
         return;
     }
     if(getItem(index)->getType() == "shield")
     {
-        std::cout << "I equipping shield! (+ "<< getItem(index)->getdef() << " DEF || + "<< getItem(index)->gethp() << " HP)" << std::endl;
         if(_armor[3] == nullptr)
         {
+            std::cout << "I equipping shield! (+ "<< getItem(index)->getdef() << " DEF || + "<< getItem(index)->gethp() << " HP)" << std::endl;
             _armor[3] = getItem(index);
+            _DEF = (getDEF() + getItem(index)->getdef());
+            _maxHP = (getMaxHP() + getItem(index)->gethp());
             removeItem(getItem(index));
         }
-        else swapItems(_armor[3], getItem(index));
-        _DEF = (getDEF() + getItem(index)->getdef());
-        _maxHP = (getMaxHP() + getItem(index)->gethp());
+        else
+        {
+            updateStats(getItem(index), _armor[3]);
+            swapItems(getItem(index), _armor[3]);
+        }
+        return;
+    }
+    if(getItem(index)->getType() == "potion")
+    {
+        std::cout << "\"Drinking potion...\"\n";
+        if(getItem(index)->getName() == "Red-potion")
+        {
+            if(25 + getHP() > getMaxHP()) setHP(getMaxHP());
+            else setHP(getHP() + 25);
+        }
+        else
+        {
+            if(25 + getMANA() > getMaxMANA()) setMANA(getMaxMANA());
+            else setMANA(getMANA() + 25);
+        }
         return;
     }
 }

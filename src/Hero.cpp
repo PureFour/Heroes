@@ -144,6 +144,27 @@ void Hero::addPoints(int points)
     }
 }
 
+void Hero::updateStats(Item *a, Item *b)
+{
+    if(a->gethp() > b->gethp()) setMaxHP(getMaxHP() + (a->gethp() - b->gethp()));
+    else setMaxHP(getMaxHP() - (b->gethp() - a->gethp()));
+
+    if(a->getmana() > b->getmana()) setMaxMANA(getMaxMANA() + (a->getmana() - b->getmana()));
+    else setMaxMANA(getMaxMANA() - (b->getmana() - a->getmana()));
+
+    if(a->getad() > b->getad()) setAD(getAD() + (a->getad() - b->getad()));
+    else setAD(getAD() - (b->getad() - a->getad()));
+
+    if(a->getap() > b->getap()) setAP(getAP() + (a->getap() - b->getap()));
+    else setAP(getAP() - (b->getap() - a->getap()));
+
+    if(a->getluck() > b->getluck()) setLuck(getLuck() + (a->getluck() - b->getluck()));
+    else setLuck(getLuck() - (b->getluck() - a->getluck()));
+
+    if(a->getdef() > b->getdef()) setDEF(getDEF() + (a->getdef() - b->getdef()));
+    else setDEF(getDEF() - (b->getdef() - a->getdef()));
+}
+
 
 
 

@@ -36,6 +36,7 @@ const void Inventory::addItem(Item *item)
     else
     {
         _inventory.push_back(item);
+        if(item->getIndex() == 0) item->setIndex(Size);
         item->setIndex(Size);
         Size += 1;
     }

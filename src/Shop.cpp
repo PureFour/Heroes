@@ -190,16 +190,21 @@ void Shop::Buy(Hero *hero) {
                 if(getItem(index)->getType() == "arrow")
                 {
                     std::cout << "How much?(max 100)\n";
-                    int amount = myInput(100);
-                    hero->setArrows(hero->getArrows() + amount);
-                    hero->setGold(hero->getGold() - amount * (getItem(index)->getBuyValue()));
+                    int amount = myInput(101);
+                    if(hero->getGold() >= (amount * (getItem(index)->getBuyValue())))
+                    {
+                        hero->setArrows(hero->getArrows() + amount);
+                        hero->setGold(hero->getGold() - amount * (getItem(index)->getBuyValue()));
+                        std::cout << "You bought an item(items)!\n" << "Remaining Gold: " << hero->getGold() << std::endl;
+                    }
+                    else std::cout << "This is too much!\n";
                 }
                 else
                 {
                     hero->setGold(hero->getGold() - getItem(index)->getBuyValue());
                     hero->addItem(getItem(index));
+                    std::cout << "You bought an item!\n" << "Remaining Gold: " << hero->getGold() << std::endl;
                 }
-                std::cout << "You bought an item!\n" << "Remaining Gold: " << hero->getGold() << std::endl;
             }
             else std::cout << "You don't have enough money!" << std::endl;
         case 0:
@@ -226,6 +231,7 @@ void Shop::Sell(Hero *hero)
         case 1:
             hero->setGold(hero->getGold() + hero->getItem(index)->getSellValue());
             addItem(getItem(index));
+            hero->removeItem(getItem(index));
             std::cout << "You sold an item!\n" << "Your Gold: " << hero->getGold() << std::endl;
         case 0:
             break;

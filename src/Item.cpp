@@ -6,6 +6,13 @@ Item::Item(std::string n, std::string t, unsigned int b, unsigned int stats)
     this->type = t;
     this->buyValue = b;
     this->sellValue = b / 2;
+    this->_ad = 0;
+    this->_ap = 0;
+    this->_hp = 0;
+    this->_mana = 0;
+    this->_def = 0;
+    this->_luck = 0;
+
     if(t == "melee" || "ranged")
     {
         this->_ad = stats * 3;
@@ -46,16 +53,16 @@ const void Item::showItem() const
     else
     {
         std::cout << std::string(30, '+') << std::endl;
-        std::cout << std::setw(28) << "Index:" << std::setw(2) << getIndex() << " ||\n";
-        std::cout << "Type: " << getType() << std::setw(static_cast<int>(27 - getType().length())) << " ||";
-        std::cout << "\nName: " << getName() << std::setw(static_cast<int>(27 - getName().length())) << " ||";
-        std::cout << "\nBuy Value:" << std::setw(3) << getBuyValue() << std::setw(20) << " ||";
-        std::cout << "\nSell Value:" << std::setw(3) << getSellValue() << std::setw(19) << " ||" << std::endl;
+        std::cout << std::setw(28) << "Index:" << std::setw(2) << getIndex() << " ||" << std::setw(10) << " Attack damage + " << getad() << std::endl;
+        std::cout << "Type: " << getType() << std::setw(static_cast<int>(27 - getType().length())) << " ||" << " Magic damage + " << getap();
+        std::cout << "\nName: " << getName() << std::setw(static_cast<int>(27 - getName().length())) << " ||" << " Defence + " << getdef();
+        std::cout << "\nBuy Value:" << std::setw(3) << getBuyValue() << std::setw(20) << " ||" << " Health points + " << gethp() << " |" << " Mana points + " << getmana();
+        std::cout << "\nSell Value:" << std::setw(3) << getSellValue() << std::setw(19) << " ||" << " Luck + " << getluck() << std::endl;
         std::cout << std::string(30, '-') << std::endl;
     }
 }
 
-const std::string &Item::getName() const { return this->name;}
+const std::string &Item::getName() const { return this->name; }
 const std::string &Item::getType() const {return this->type;}
 const unsigned int &Item::getBuyValue() const { return this->buyValue; }
 const unsigned int &Item::getSellValue() const { return this->sellValue; }

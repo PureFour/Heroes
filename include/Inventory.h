@@ -10,7 +10,7 @@ protected:
     unsigned int maxSize;
 
 public:
-    Inventory(unsigned int size = 5);
+    explicit Inventory(unsigned int size = 5);
     virtual ~Inventory();
     //get F
     const unsigned int & getSize()const;

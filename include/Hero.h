@@ -10,7 +10,7 @@
 #ifndef HEROES_HERO_H
 #define HEROES_HERO_H
 
-class Hero : public Inventory   //BASE CLASS FOR HEROES //public: inv
+class Hero : public Inventory   //BASE CLASS FOR HEROES
 {
 protected:
     //Hero position on map
@@ -94,6 +94,7 @@ public:
     void LevelUp();
     virtual void attack(Hero &) = 0;
     virtual void equip() = 0;
+    void updateStats(Item *, Item *);
     virtual const void showItems() const = 0;
   //  void Travel();
     //
