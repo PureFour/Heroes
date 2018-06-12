@@ -66,7 +66,7 @@ public:
     const unsigned int &getInt() const;
     const unsigned int &getLuck() const;
     const std::array<Item*, 4> & getArmor() const;
-    const Item* getWeapon() const;
+    Item* getWeapon() const;
     const unsigned int &getArrows() const;
     //SetFunctions
     void setName(std::string);
@@ -94,7 +94,7 @@ public:
     void LevelUp();
     virtual void attack(Hero &) = 0;
     virtual void equip() = 0;
-    void updateStats(Item *, Item *);
+    void updateItems(Item *, Item *);
     virtual const void showItems() const = 0;
   //  void Travel();
     //

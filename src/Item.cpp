@@ -6,39 +6,59 @@ Item::Item(std::string n, std::string t, unsigned int b, unsigned int stats)
     this->type = t;
     this->buyValue = b;
     this->sellValue = b / 2;
-    this->_ad = 0;
-    this->_ap = 0;
-    this->_hp = 0;
-    this->_mana = 0;
-    this->_def = 0;
-    this->_luck = 0;
+    this->_lvl = 1;
 
     if(t == "melee" || "ranged")
     {
+        this->_ap = 0;
+        this->_hp = 0;
+        this->_mana = 0;
+        this->_def = 0;
         this->_ad = stats * 3;
         this->_luck = stats;
     }
     if(t == "magic")
     {
+        this->_ad = 0;
+        this->_hp = 0;
+        this->_def = 0;
+        this->_luck = 0;
         this->_ap = stats * 3;
         this->_mana = stats * 10;
     }
     if(t == "helmet")
     {
+        this->_ap = 0;
+        this->_ad = 0;
+        this->_hp = 0;
+        this->_mana = 0;
+        this->_luck = 0;
         this->_def = stats;
     }
     if(t == "armor")
     {
+        this->_ap = 0;
+        this->_ad = 0;
+        this->_mana = 0;
+        this->_luck = 0;
         this->_def = stats * 3;
         this->_hp = stats * 20;
     }
     if(t == "boots")
     {
+        this->_ap = 0;
+        this->_ad = 0;
+        this->_mana = 0;
+        this->_luck = 0;
         this->_def = stats;
         this->_hp = stats * 5;
     }
     if(t == "shield")
     {
+        this->_ap = 0;
+        this->_ad = 0;
+        this->_mana = 0;
+        this->_luck = 0;
         this->_def = stats * 2;
         this->_hp = stats * 10;
     }
@@ -74,8 +94,60 @@ const unsigned int& Item::getdef() const { return this->_def; }
 const unsigned int& Item::gethp() const { return this->_hp; }
 const unsigned int& Item::getmana() const { return this->_mana; }
 const unsigned int& Item::getluck() const { return this->_luck; }
+const unsigned int& Item::getlvl() const { return this->_lvl; }
 
 void Item::setIndex(unsigned int i)
 {
     this->index = i;
+}
+
+Item* Item::operator++()
+{
+    std::cout << "Upgrading item..." << std::endl;
+    if(this->getType() == "melee")
+    {
+        std::cout << "UPGRADING MELEE WEAPON!\n";
+        this->_ad += _lvl;
+        this->_lvl += 1;
+    }
+    if(this->getType() == "ranged")
+    {
+        std::cout << "UPGRADING RANGED WEAPON!\n";
+        this->_ad += _lvl;
+        this->_lvl += 1;
+    }
+    if(this->getType() == "magic")
+    {
+        std::cout << "UPGRADING MAGIC WEAPON!\n";
+        this->_ap += _lvl;
+        this->_mana += 10 * _lvl;
+        this->_lvl += 1;
+    }
+    if(this->getType() == "helmet")
+    {
+        std::cout << "UPGRADING HELMET!\n";
+        this->_def += _lvl;
+        this->_lvl += 1;
+    }
+    if(this->getType() == "armor")
+    {
+        std::cout << "UPGRADING BREASTPLATE!\n";
+        this->_def += _lvl;
+        this->_hp += 10 * _lvl;
+        this->_lvl += 1;
+    }
+    if(this->getType() == "boots")
+    {
+        std::cout << "UPGRADING BOOTS!\n";
+        this->_def += _lvl;
+        this->_hp += 5 * _lvl;
+        this->_lvl += 1;
+    }
+    if(this->getType() == "shield")
+    {
+        std::cout << "UPGRADING SHIELD!\n";
+        this->_def += _lvl;
+        this->_hp += 5 * _lvl;
+        this->_lvl += 1;
+    }
 }

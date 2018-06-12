@@ -18,6 +18,7 @@ class Item
     unsigned int _hp;
     unsigned int _mana;
     unsigned int _luck;
+    unsigned int _lvl;
     //
 public:
     explicit Item(std::string name = "Unknown", std::string type = "Unknown", unsigned int buyValue = 0, unsigned int stats = 0);
@@ -35,11 +36,13 @@ public:
     const unsigned int &gethp() const;
     const unsigned int &getmana() const;
     const unsigned int &getluck() const;
+    const unsigned int &getlvl() const;
     //
     //SetFunctions
     void setIndex(unsigned int);
     //
     const void showItem()const ;
+    Item* operator ++();
 };
 
 #endif //HEROES_ITEM_H

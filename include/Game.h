@@ -27,8 +27,10 @@ public:
     unsigned int HeroChoice();
     void mainMenu(Hero *, Shop *, Enemy *);
     void InventoryMenu(Hero *);
+    std::string EnemyMenu() const;
     const void Save(Hero *) const;
     const void Load(Hero *);
+    void UpgradeItemMenu(Hero *) const;
 };
 
 

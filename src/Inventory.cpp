@@ -8,7 +8,7 @@ Inventory::Inventory(unsigned int size)
 }
 Inventory::~Inventory() {}
 
-const unsigned int & Inventory::getSize()const { return this->Size; }
+const unsigned int& Inventory::getSize()const { return this->Size; }
 
 const unsigned int& Inventory::setSize(unsigned int size) { this->maxSize = size; }
 
@@ -17,7 +17,13 @@ const void Inventory::showInv() const
     if(Size == 0) std::cout << "Inventory is empty!" << std::endl;
     else
     {
-        for(auto i : _inventory) i->showItem();
+        unsigned int j = 0;
+        for(auto i : _inventory)
+        {
+            i->setIndex(j);
+            i->showItem();
+            j++;
+        }
     }
 }
 
@@ -60,7 +66,9 @@ int Inventory::removeItem(Item *item)
     if(Size == 0) std::cout << "Inventory is empty!" << std::endl;
     else
     {
-        _inventory.erase(_inventory.begin() + item->getIndex()); //TODO moze byc zle ??
+        unsigned int index = item->getIndex();
+        delete item;
+        this->_inventory[index] = this->_inventory[index + 1];
         Size -= 1;
         return 1;
     }

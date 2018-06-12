@@ -28,7 +28,7 @@ const unsigned int &Hero::getDex() const { return this->_Dexterity; }
 const unsigned int &Hero::getInt() const { return this->_Intelligence; }
 const unsigned int &Hero::getLuck() const { return this->_Luck; }
 const std::array<Item*, 4>& Hero::getArmor() const { return this->_armor; }
-const Item* Hero::getWeapon() const { return this->_weapon; }
+Item* Hero::getWeapon() const { return this->_weapon; }
 const unsigned int& Hero::getArrows() const { return this->_Arrows; }
 
 void Hero::setName(std::string n) { name = n; }
@@ -107,7 +107,7 @@ void Hero::LevelUp()
 }
 bool Hero::Crit(unsigned int luck)
 {
-    return rand() % 100 < 10 * luck;
+    return rand() % 100 < 10 * luck; // luck > 10 ??
 }
 
 void Hero::addPoints(int points)
@@ -144,7 +144,7 @@ void Hero::addPoints(int points)
     }
 }
 
-void Hero::updateStats(Item *a, Item *b)
+void Hero::updateItems(Item *a, Item *b)
 {
     if(a->gethp() > b->gethp()) setMaxHP(getMaxHP() + (a->gethp() - b->gethp()));
     else setMaxHP(getMaxHP() - (b->gethp() - a->gethp()));

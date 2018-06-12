@@ -6,9 +6,9 @@ Warrior::Warrior(std::string n) : Hero(n)
     this->_X = 0;
     this->_Y = 0;
 
-    this->_GOLD = 100;
+    this->_GOLD = 0;
     this->_LVL = 1;
-    this->_EXP = 20;
+    this->_EXP = 0;
     this->_EXP2NEXTLVL = static_cast<unsigned int>( ( (50/3) * ( pow(this->_LVL, 3.0) ) - (6.0 * pow(this->_LVL, 3.0) ) + (17.0 * this->_LVL) - 11.0) ); //LVL^UP FORMULA
 
 
@@ -86,7 +86,8 @@ void Warrior::equip() //TODO cos nie dziala ... zrobic statsy...
         }
         else
         {
-            updateStats(getItem(index), _weapon);
+            std::cout << "Items swapped!\n";
+            updateItems(getItem(index), _weapon);
             swapItems(getItem(index), _weapon);
         }
         return;
@@ -112,7 +113,8 @@ void Warrior::equip() //TODO cos nie dziala ... zrobic statsy...
         }
         else
         {
-            updateStats(getItem(index), _armor[0]);
+            std::cout << "Items swapped!\n";
+            updateItems(getItem(index), _armor[0]);
             swapItems(getItem(index), _armor[0]);
         }
         return;
@@ -129,7 +131,8 @@ void Warrior::equip() //TODO cos nie dziala ... zrobic statsy...
         }
         else
         {
-            updateStats(getItem(index), _armor[1]);
+            std::cout << "Items swapped!\n";
+            updateItems(getItem(index), _armor[1]);
             swapItems(getItem(index), _armor[1]);
         }
         return;
@@ -146,7 +149,8 @@ void Warrior::equip() //TODO cos nie dziala ... zrobic statsy...
         }
         else
         {
-            updateStats(getItem(index), _armor[2]);
+            std::cout << "Items swapped!\n";
+            updateItems(getItem(index), _armor[2]);
             swapItems(getItem(index), _armor[2]);
         }
         return;
@@ -163,7 +167,8 @@ void Warrior::equip() //TODO cos nie dziala ... zrobic statsy...
         }
         else
         {
-            updateStats(getItem(index), _armor[3]);
+            std::cout << "Items swapped!\n";
+            updateItems(getItem(index), _armor[3]);
             swapItems(getItem(index), _armor[3]);
         }
         return;

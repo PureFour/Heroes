@@ -6,9 +6,9 @@ Archer::Archer(std::string n) : Hero(n)
     this->_X = 0;
     this->_Y = 0;
 
-    this->_GOLD = 100;
+    this->_GOLD = 0;
     this->_LVL = 1;
-    this->_EXP = 20;
+    this->_EXP = 0;
     this->_EXP2NEXTLVL = static_cast<unsigned int>((50/3) * (pow(_LVL, 3) - 6 * pow(_LVL, 3) + (17 * _LVL) - 11)); //LVL^UP FORMULA
 
     this->_maxHP = 50;
@@ -44,7 +44,7 @@ void Archer::attack(Hero &enemy)
     unsigned int HP = enemy.getHP();
     defence = ((rand() % (enemy.getDEF() - enemy.getDEF() / 2)) + enemy.getDEF() / 2);
     attack = ((rand() % (getAD() - getAD() / 2)) + getAD() / 2);
-    std::cout  << this->name << " (Archer)" << " is performing attack!\n";
+    std::cout  << this->name << " (Archer)" << " is performing attack! ARROWS : " << getArrows() << std::endl;
     std::cout  << enemy.getName() << " DEF = " << defence << std::endl;
     if(attack > defence && getArrows())
     {
@@ -95,7 +95,8 @@ void Archer::equip()
         }
         else
         {
-            updateStats(getItem(index), _weapon);
+            std::cout << "Items swapped!\n";
+            updateItems(getItem(index), _weapon);
             swapItems(getItem(index), _weapon);
         }
         return;
@@ -116,7 +117,8 @@ void Archer::equip()
         }
         else
         {
-            updateStats(getItem(index), _armor[0]);
+            std::cout << "Items swapped!\n";
+            updateItems(getItem(index), _armor[0]);
             swapItems(getItem(index), _armor[0]);
         }
         return;
@@ -133,7 +135,8 @@ void Archer::equip()
         }
         else
         {
-            updateStats(getItem(index), _armor[1]);
+            std::cout << "Items swapped!\n";
+            updateItems(getItem(index), _armor[1]);
             swapItems(getItem(index), _armor[1]);
         }
         return;
@@ -150,7 +153,8 @@ void Archer::equip()
         }
         else
         {
-            updateStats(getItem(index), _armor[2]);
+            std::cout << "Items swapped!\n";
+            updateItems(getItem(index), _armor[2]);
             swapItems(getItem(index), _armor[2]);
         }
         return;
@@ -167,7 +171,8 @@ void Archer::equip()
         }
         else
         {
-            updateStats(getItem(index), _armor[3]);
+            std::cout << "Items swapped!\n";
+            updateItems(getItem(index), _armor[3]);
             swapItems(getItem(index), _armor[3]);
         }
         return;
