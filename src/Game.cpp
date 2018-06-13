@@ -213,10 +213,11 @@ void Game::UpgradeItemMenu(Hero *h) const
     std::cout << "(2)Breastplate\n";
     std::cout << "(3)Boots\n";
     std::cout << "(4)Shield\n";
+    std::cout << "(5)QUIT\n";
     Item *i = nullptr;
     unsigned int cost = 0;
     unsigned int choice;
-    switch(myInput(5))
+    switch(myInput(6))
     {
         case 0:
             i = h->getWeapon();
@@ -306,6 +307,8 @@ void Game::UpgradeItemMenu(Hero *h) const
                 else std::cout << "You don't have enough gold!\n";
             }
             break;
+        case 5:
+            return;
         default:
             break;
     }
