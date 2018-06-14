@@ -6,13 +6,17 @@ Warrior::Warrior(std::string n) : Hero(n)
     this->_X = 0;
     this->_Y = 0;
 
-    this->_GOLD = 100;
+    this->_GOLD = 0;
     this->_LVL = 1;
-    this->_EXP = 20;
+    this->_EXP = 0;
     this->_EXP2NEXTLVL = static_cast<unsigned int>( ( (50/3) * ( pow(this->_LVL, 3.0) ) - (6.0 * pow(this->_LVL, 3.0) ) + (17.0 * this->_LVL) - 11.0) ); //LVL^UP FORMULA
 
-    this->_HP = 150;
+
+    this->_HP = 100;
+    this->_maxHP = _HP;
+
     this->_MANA = 0;
+    this->_maxMANA = _MANA;
     this->_AD = 12;
     this->_AP = 0;
     this->_DEF = 10;
@@ -21,10 +25,9 @@ Warrior::Warrior(std::string n) : Hero(n)
     this->_Vitality = 6; // 1 = 25 HP
     this->_Dexterity = 4; // 1 = 3 DEF
     this->_Intelligence = 0; // 1 = 25 MANA
-    this->_Luck = 5; // 1 = 10% CritChance
+    this->_Luck = 2; // 1 = 10% CritChance
 
-   // this->_inventory = {};
-    //setSize(1); // size of inventory...
+    setSize(5); // size of inventory...
     this->_armor = {nullptr, nullptr, nullptr, nullptr};
     this->_weapon = nullptr;
     std::cout << "Warrior constructor works here...\n";
@@ -59,7 +62,7 @@ void Warrior::attack(Hero &enemy)
     }
 }
 
-void Warrior::equip() //TODO cos nie dziala ...
+void Warrior::equip() //TODO cos nie dziala ... zrobic statsy...
 {
     if(getSize() == 0)
     {
@@ -73,14 +76,21 @@ void Warrior::equip() //TODO cos nie dziala ...
 
     if(getItem(index)->getType() == "melee")
     {
-        std::cout << "I equipping weapon!(+5 AD)" << std::endl;
         if(_weapon == nullptr)
         {
+            std::cout << "I equipping weapon!(+ " << getItem(index)->getad() << " AD || + "<< getItem(index)->getluck() << " LUCK)" << std::endl;
             _weapon = getItem(index);
+            _AD += getItem(index)->getad();
+            _Luck += getItem(index)->getluck();
             removeItem(getItem(index));
         }
-        else swapItems(_weapon, getItem(index));
-        _AD = (getAD() + 5);
+        else
+        {
+            std::cout << "Items swapped!\n";
+            updateItems(getItem(index), _weapon);
+            swapItems(getItem(index), _weapon);
+        }
+        return;
     }
     if(getItem(index)->getType() == "ranged")
     {
@@ -94,55 +104,112 @@ void Warrior::equip() //TODO cos nie dziala ...
     }
     if(getItem(index)->getType() == "helmet")
     {
-        std::cout << "I equipping helmet!(+5 DEF)" << std::endl;
         if(_armor[0] == nullptr)
         {
+            std::cout << "I equipping helmet!(+ "<< getItem(index)->getdef() << " DEF)" << std::endl;
             _armor[0] = getItem(index);
+            _DEF = (getDEF() + getItem(index)->getdef());
             removeItem(getItem(index));
         }
-        else swapItems(_armor[0], getItem(index));
-        _DEF = (getDEF() + 5);
+        else
+        {
+            std::cout << "Items swapped!\n";
+            updateItems(getItem(index), _armor[0]);
+            swapItems(getItem(index), _armor[0]);
+        }
+        return;
     }
     if(getItem(index)->getType() == "armor")
     {
-        std::cout << "I equipping armor!(+15 VIT)" << std::endl;
         if(_armor[1] == nullptr)
         {
+            std::cout << "I equipping armor! (+ "<< getItem(index)->getdef() << " DEF || + "<< getItem(index)->gethp() << " HP)" << std::endl;
             _armor[1] = getItem(index);
+            _DEF = (getDEF() + getItem(index)->getdef());
+            _maxHP = (getMaxHP() + getItem(index)->gethp());
             removeItem(getItem(index));
         }
-        else swapItems(_armor[1], getItem(index));
-        _Vitality = (getVit() + 15);
+        else
+        {
+            std::cout << "Items swapped!\n";
+            updateItems(getItem(index), _armor[1]);
+            swapItems(getItem(index), _armor[1]);
+        }
+        return;
     }
     if(getItem(index)->getType() == "boots")
     {
-        std::cout << "I equipping boots!(+5 DEX)" << std::endl;
         if(_armor[2] == nullptr)
         {
+            std::cout << "I equipping boots! (+ "<< getItem(index)->getdef() << " DEF || + "<< getItem(index)->gethp() << " HP)" << std::endl;
             _armor[2] = getItem(index);
+            _DEF = (getDEF() + getItem(index)->getdef());
+            _maxHP = (getMaxHP() + getItem(index)->gethp());
             removeItem(getItem(index));
         }
-        else swapItems(_armor[2], getItem(index));
-        _Dexterity = (getDex() + 5);
+        else
+        {
+            std::cout << "Items swapped!\n";
+            updateItems(getItem(index), _armor[2]);
+            swapItems(getItem(index), _armor[2]);
+        }
+        return;
     }
     if(getItem(index)->getType() == "shield")
     {
-        std::cout << "I equipping shield!(+10 DEF)" << std::endl;
         if(_armor[3] == nullptr)
         {
+            std::cout << "I equipping shield! (+ "<< getItem(index)->getdef() << " DEF || + "<< getItem(index)->gethp() << " HP)" << std::endl;
             _armor[3] = getItem(index);
+            _DEF = (getDEF() + getItem(index)->getdef());
+            _maxHP = (getMaxHP() + getItem(index)->gethp());
             removeItem(getItem(index));
         }
-        else swapItems(_armor[3], getItem(index));
-        _DEF = (getDEF() + 10);
+        else
+        {
+            std::cout << "Items swapped!\n";
+            updateItems(getItem(index), _armor[3]);
+            swapItems(getItem(index), _armor[3]);
+        }
+        return;
+    }
+    if(getItem(index)->getType() == "potion")
+    {
+        std::cout << "\"Drinking potion...\"\n";
+        if(getItem(index)->getName() == "Red-potion")
+        {
+            if(25 + getHP() > getMaxHP()) setHP(getMaxHP());
+            else setHP(getHP() + 25);
+        }
+        else
+        {
+            if(25 + getMANA() > getMaxMANA()) setMANA(getMaxMANA());
+            else setMANA(getMANA() + 25);
+        }
+        return;
     }
 }
 
 const void Warrior::showItems() const
 {
-    std::cout << "WARRIOR EQUIPMENT...\n";
-    std::cout << "\nWARRIOR ARMOR\n";
-    for(auto i : _armor) i->showItem();
-    std::cout << "WARRIOR WEAPON\n";
+    std::cout << std::string(WIDTH, 'X') << std::endl;
+    std::cout << std::string(30, ' ') << "WARRIOR EQUIPMENT\n";
+    std::cout << std::string(WIDTH, 'X') << std::endl;
+    std::cout << std::string(8, ' ') << "WARRIOR WEAPON\n";
     _weapon->showItem();
+    std::cout << std::string(WIDTH, 'x') << std::endl;
+    std::cout << std::string(8, ' ') << "HELMET\n";
+    _armor[0]->showItem();
+    std::cout << std::string(WIDTH, 'x') << std::endl;
+    std::cout << std::string(8, ' ') << "BREASTPLATE\n";
+    _armor[1]->showItem();
+    std::cout << std::string(WIDTH, 'x') << std::endl;
+    std::cout << std::string(8, ' ') << "BOOTS\n";
+    _armor[2]->showItem();
+    std::cout << std::string(WIDTH, 'x') << std::endl;
+    std::cout << std::string(8, ' ') << "SHIELD\n";
+    _armor[3]->showItem();
+    std::cout << std::string(WIDTH, 'x') << std::endl;
+    std::cout << std::endl;
+    std::cout << std::string(WIDTH, 'X') << std::endl;
 }

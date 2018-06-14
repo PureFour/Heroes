@@ -10,7 +10,7 @@
 #ifndef HEROES_HERO_H
 #define HEROES_HERO_H
 
-class Hero : public Inventory   //BASE CLASS FOR HEROES //public: inv
+class Hero : public Inventory   //BASE CLASS FOR HEROES
 {
 protected:
     //Hero position on map
@@ -20,7 +20,9 @@ protected:
     //Basic Stats
     std::string name;
     unsigned int _HP;
+    unsigned int _maxHP;
     unsigned int _MANA;
+    unsigned int _maxMANA;
     unsigned int _AD;
     unsigned int _AP; //Magic DMG
     unsigned int _DEF;
@@ -37,6 +39,7 @@ protected:
     //Hero equipment
     std::array<Item*, 4> _armor; //helmet, breastplate, shield, boots
     Item* _weapon;
+    unsigned int _Arrows;
     //
     //Functions
     bool Crit(unsigned int);
@@ -48,7 +51,9 @@ public:
     const unsigned int &getGold() const;
     const std::string &getName() const;
     const unsigned int &getHP() const;
+    const unsigned int &getMaxHP() const;
     const unsigned int &getMANA() const;
+    const unsigned int &getMaxMANA() const;
     const unsigned int &getAD() const;
     const unsigned int &getAP() const;
     const unsigned int &getDEF() const;
@@ -61,11 +66,14 @@ public:
     const unsigned int &getInt() const;
     const unsigned int &getLuck() const;
     const std::array<Item*, 4> & getArmor() const;
-    const Item* getWeapon() const;
+    Item* getWeapon() const;
+    const unsigned int &getArrows() const;
     //SetFunctions
     void setName(std::string);
     void setHP(unsigned int);
+    void setMaxHP(unsigned int);
     void setMANA(unsigned int);
+    void setMaxMANA(unsigned int);
     void setLVL(unsigned int);
     void setEXP(unsigned int);
     void setEXP2NEXTLV(unsigned int);
@@ -78,7 +86,7 @@ public:
     void setDex(unsigned int);
     void setInt(unsigned int);
     void setLuck(unsigned int);
-
+    void setArrows(unsigned int);
     //
     //HeroFunctions
     void status();
@@ -86,6 +94,7 @@ public:
     void LevelUp();
     virtual void attack(Hero &) = 0;
     virtual void equip() = 0;
+    void updateItems(Item *, Item *);
     virtual const void showItems() const = 0;
   //  void Travel();
     //

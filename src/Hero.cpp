@@ -12,7 +12,9 @@ const unsigned int& Hero::getGold() const { return this->_GOLD; }
 
 const std::string &Hero::getName() const{ return this->name; }
 const unsigned int &Hero::getHP() const { return this->_HP; }
+const unsigned int &Hero::getMaxHP() const { return this->_maxHP; }
 const unsigned int &Hero::getMANA() const { return this->_MANA; }
+const unsigned int &Hero::getMaxMANA() const { return this->_maxMANA; }
 const unsigned int &Hero::getAD() const { return this->_AD; }
 const unsigned int &Hero::getAP() const { return this->_AP; }
 const unsigned int &Hero::getDEF() const { return this->_DEF; }
@@ -26,11 +28,14 @@ const unsigned int &Hero::getDex() const { return this->_Dexterity; }
 const unsigned int &Hero::getInt() const { return this->_Intelligence; }
 const unsigned int &Hero::getLuck() const { return this->_Luck; }
 const std::array<Item*, 4>& Hero::getArmor() const { return this->_armor; }
-const Item* Hero::getWeapon() const { return this->_weapon; }
+Item* Hero::getWeapon() const { return this->_weapon; }
+const unsigned int& Hero::getArrows() const { return this->_Arrows; }
 
 void Hero::setName(std::string n) { name = n; }
 void Hero::setHP(unsigned int hp) { _HP = hp; }
+void Hero::setMaxHP(unsigned int max) { _maxHP = max; }
 void Hero::setMANA(unsigned int mana) { _MANA = mana; }
+void Hero::setMaxMANA(unsigned int max) { _maxMANA = max; }
 void Hero::setLVL(unsigned int lv) { _LVL = lv; }
 void Hero::setEXP(unsigned int exp) { _EXP = exp; }
 void Hero::setEXP2NEXTLV(unsigned int exp2) { _EXP2NEXTLVL = exp2; }
@@ -43,17 +48,16 @@ void Hero::setVit(unsigned int vit) { _Vitality = vit; }
 void Hero::setDex(unsigned int dex) { _Dexterity = dex; }
 void Hero::setInt(unsigned int _int) { _Intelligence = _int; }
 void Hero::setLuck(unsigned int luck) { _Luck = luck; }
-
-
+void Hero::setArrows(unsigned int arrows) { _Arrows = arrows; }
 Hero *Hero::Initialize(std::string n, unsigned int choice)
 {
     switch(choice)
     {
-        case 1:
+        case 0:
             return new Warrior(n);
-        case 2:
+        case 1:
             return new Mage(n);
-        case 3:
+        case 2:
             return new Archer(n);
         default:
             break;
@@ -68,8 +72,8 @@ void Hero::status()
     std::cout << "Exp to next Lvl: " << getEXP2NEXTLVL() << std::endl;
     std::cout << "GOLD: " << getGold() << std::endl;
     std::cout << std::string(WIDTH, '-') << std::endl;
-    std::cout << "HP: " << getHP() << std::endl;
-    std::cout << "MANA: " << getMANA() << std::endl;
+    std::cout << "HP: " << getHP() << "/" << getMaxHP() << std::endl;
+    std::cout << "MANA: " << getMANA() << "/" << getMaxMANA() << std::endl;
     std::cout << "AD: " << getAD() << std::endl;
     std::cout << "AP: " << getAP() << std::endl;
     std::cout << "DEF: " << getDEF() << std::endl;
@@ -103,7 +107,7 @@ void Hero::LevelUp()
 }
 bool Hero::Crit(unsigned int luck)
 {
-    return rand() % 100 < 10 * luck;
+    return rand() % 100 < 10 * luck; // luck > 10 ??
 }
 
 void Hero::addPoints(int points)
@@ -124,20 +128,41 @@ void Hero::addPoints(int points)
                 break;
             case 2:
                 _Vitality += 1;
-                _HP += 25;
+                _maxHP += 25;
                 break;
             case 3:
                 _Dexterity += 1;
                 _DEF += 3;
             case 4:
                 _Intelligence += 1;
-                _MANA += 25;
+                _maxMANA += 25;
                 break;
             default:
                 break;
         }
         points -= 1;
     }
+}
+
+void Hero::updateItems(Item *a, Item *b)
+{
+    if(a->gethp() > b->gethp()) setMaxHP(getMaxHP() + (a->gethp() - b->gethp()));
+    else setMaxHP(getMaxHP() - (b->gethp() - a->gethp()));
+
+    if(a->getmana() > b->getmana()) setMaxMANA(getMaxMANA() + (a->getmana() - b->getmana()));
+    else setMaxMANA(getMaxMANA() - (b->getmana() - a->getmana()));
+
+    if(a->getad() > b->getad()) setAD(getAD() + (a->getad() - b->getad()));
+    else setAD(getAD() - (b->getad() - a->getad()));
+
+    if(a->getap() > b->getap()) setAP(getAP() + (a->getap() - b->getap()));
+    else setAP(getAP() - (b->getap() - a->getap()));
+
+    if(a->getluck() > b->getluck()) setLuck(getLuck() + (a->getluck() - b->getluck()));
+    else setLuck(getLuck() - (b->getluck() - a->getluck()));
+
+    if(a->getdef() > b->getdef()) setDEF(getDEF() + (a->getdef() - b->getdef()));
+    else setDEF(getDEF() - (b->getdef() - a->getdef()));
 }
 
 

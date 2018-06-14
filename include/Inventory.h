@@ -4,13 +4,13 @@
 
 class Inventory
 {
-private:
+protected:
     std::vector<Item *> _inventory;
     unsigned int Size;
     unsigned int maxSize;
 
 public:
-    Inventory(unsigned int size = 5);
+    explicit Inventory(unsigned int size = 5);
     virtual ~Inventory();
     //get F
     const unsigned int & getSize()const;
@@ -18,10 +18,11 @@ public:
     //set F
     const unsigned int &setSize(unsigned int);
     //
-    const void showInv() const;
+    virtual const void showInv() const;
+    Item * searchItem(std::string) const;
     const void addItem(Item*);
     void swapItems(Item *, Item *);
-    const void removeItem(Item*);
+    int removeItem(Item *);
     const bool full_inventory() const;
 };
 
